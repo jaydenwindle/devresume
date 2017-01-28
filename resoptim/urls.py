@@ -11,6 +11,6 @@ import resoptim_app.views, resoptim_app.urls
 
 urlpatterns = [
     url(r'^$', resoptim_app.views.index, name='index'),
-    url(r'^app/', include(resoptim_app.urls)),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^app/', include(resoptim_app.urls)),
 ]

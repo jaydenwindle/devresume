@@ -10,8 +10,8 @@ class User(AbstractUser):
                                  message="Phone number must be entered in the format: '+999999999'. \
                                           Up to 15 digits allowed.")
     phone = models.CharField(validators=[phoneRegex], blank=True, max_length=15) # validators should be a list
-    website = models.URLField();
-    summary = models.TextField();
+    website = models.URLField(blank=True);
+    summary = models.TextField(blank=True);
 
 class SocialProfile(models.Model):
     TWITTER = 'TW'
