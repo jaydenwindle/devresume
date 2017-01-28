@@ -1,2 +1,2 @@
-# mchacks2017
+# ResOptim
 Our team project for McHacks
