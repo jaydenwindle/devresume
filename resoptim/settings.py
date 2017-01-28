@@ -2,8 +2,7 @@
 Django settings for gettingstarted project, on Heroku. For more info, see:
 https://github.com/heroku/heroku-django-template
 
-For more information on this file, see
-https://docs.djangoproject.com/en/1.8/topics/settings/
+For more information on this file, see https://docs.djangoproject.com/en/1.8/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
@@ -37,7 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'hello'
+    'resoptim_app'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -51,7 +50,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'gettingstarted.urls'
+ROOT_URLCONF = 'resoptim.urls'
 
 TEMPLATES = [
     {
@@ -70,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'gettingstarted.wsgi.application'
+WSGI_APPLICATION = 'resoptim.wsgi.application'
 
 
 # Database
