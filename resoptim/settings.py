@@ -135,3 +135,5 @@ STATICFILES_DIRS = (
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
+# Custom user model for custom fields
+AUTH_USER_MODEL = 'resoptim_app.User'
