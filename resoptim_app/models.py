@@ -46,6 +46,14 @@ class WorkEntry(models.Model):
     startDate = models.DateField();
     endDate = models.DateField();
 
+class ProjectEntry(models.Model):
+    user = models.ForeignKey(User, related_name="projects")
+    name = models.CharField(max_length=200);
+    gh_repo = models.CharField(max_length=200);
+    website = models.URLField(blank=True);
+    description = models.TextField();
+    skills = models.ManyToManyField(SkillEntry, blank=True)
+
 class EducationEntry(models.Model):
     user = models.ForeignKey(User, related_name="education")
     institution = models.CharField(max_length=200); 
