@@ -74,8 +74,8 @@
                 <h3>Social Profiles</h3>
                 <hr /> {%for profile in social_profiles %}
                 <p>{{profile.url}}</p>
-                <a class="btn btn-primary" href="{% url 'update_social_profile' profile.id %}">Update(not functional)</a>
-                <a class="btn btn-danger" href="{% url 'delete_social_profile' profile.id %}">Delete(not functional)</a> {% endfor %}
+                <a class="btn btn-primary" href="{% url 'update_social_profile' profile.id %}">Update</a>
+                <a class="btn btn-danger" href="{% url 'delete_social_profile' profile.id %}">Delete</a> {% endfor %}
                 <br>
                 <br>
                 <a class="btn btn-primary" href="/">Add New Social Profile</a>

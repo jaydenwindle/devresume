@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import UpdateView, CreateView, DeleteView
-from models import WorkEntry, EducationEntry, User
 from forms import WorkEntryForm
+from models import WorkEntry, EducationEntry,SocialProfile, SkillEntry, User
 
 # Create your views here.
 def index(request):
@@ -96,6 +96,33 @@ class SocialProfileDelete(DeleteView):
     def get_object(self, queryset=None):
         """ Hook to ensure object is owned by request.user. """
         obj = super(SocialProfileDelete, self).get_object()
+        if not obj.user == self.request.user:
+            raise Http404
+        return obj
+
+class SkillEntryCreate(CreateView):
+    model = SkillEntry
+    fields = ['name']
+    template_name = 'generic_form.html'
+    success_url = '/app/'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(SkillEntryCreate, self).form_valid(form)
+
+class SkillEntryUpdate(UpdateView):
+    model = SkillEntry
+    fields = ['name']
+    template_name = 'generic_form.html'
+    success_url = '/app/'
+
+class SkillEntryDelete(DeleteView):
+    model = SkillEntry
+    template_name = 'delete_skill.html'
+    success_url = '/app/'
+    def get_object(self, queryset=None):
+        """ Hook to ensure object is owned by request.user. """
+        obj = super(SkillEntryDelete, self).get_object()
         if not obj.user == self.request.user:
             raise Http404
         return obj

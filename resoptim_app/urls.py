@@ -1,7 +1,8 @@
 from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
-from views import WorkEntryUpdate, WorkEntryCreate, WorkEntryDelete, EducationEntryUpdate, EducationEntryCreate, EducationEntryDelete,SocialProfileUpdate, SocialProfileCreate, SocialProfileDelete
+from views import WorkEntryUpdate, WorkEntryCreate, WorkEntryDelete, EducationEntryUpdate, EducationEntryCreate, EducationEntryDelete,SocialProfileUpdate, SocialProfileCreate, SocialProfileDelete,SkillEntryUpdate, SkillEntryCreate, SkillEntryDelete
+
 
 admin.autodiscover()
 
@@ -20,4 +21,8 @@ urlpatterns = [
     url(r'^create_social_profile/$', SocialProfileCreate.as_view(), name='create_social_profile'),
     url(r'^update_social_profile/(?P<pk>[\w-]+)$', SocialProfileUpdate.as_view(), name='update_social_profile'),
     url(r'^delete_social_profile/(?P<pk>[\w-]+)$', SocialProfileDelete.as_view(), name='delete_social_profile'),
+    url(r'^create_skill_entry/$', SkillEntryCreate.as_view(), name='create_skill_entry'),
+    url(r'^update_skill_entry/(?P<pk>[\w-]+)$', SkillEntryUpdate.as_view(), name='update_skill_entry'),
+    url(r'^delete_skill_entry/(?P<pk>[\w-]+)$', SkillEntryDelete.as_view(), name='delete_skill_entry'),
+    
 ]
