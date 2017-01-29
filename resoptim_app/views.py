@@ -37,6 +37,7 @@ def resume(request, pk):
     if request.user.is_authenticated():
         renderDict = {
             'user': request.user,
+            'education_entries': request.user.education.all(),
         }
         app = Counter(ApplicationEntry.objects.get(pk=pk).desired_skills.all())
 
@@ -55,7 +56,7 @@ def resume(request, pk):
                 break;
 
         # match projects
-        job_history = WorkEntry.objects.filter(user=request.user).all()
+        job_history = ProjectEntry.objects.filter(user=request.user).all()
         sorted_projects = {}
         for item in job_history:
             counter = Counter(item.skills.all())
