@@ -12,6 +12,76 @@
             <li>Email: {{user.email}}</li>
             <li>Phone: {{user.phone}}</li>
         </ul>
+
+        <h2>Work Experience</h2>
+
+        {% if job0 != None %}
+
+            <h3>{{job0.company}}</h3>
+            <h4>{{job0.company}} - {{job0.startDate}} to {{job0.endDate}}</h4>
+            <p>Skills: {% for skill in job0skills %}
+                {{skill.name}}
+            {% endfor %}</p>
+            {{job0.summary | linebreaks }}
+            
+        {% endif %}
+
+        {% if job1 != None %}
+
+            <h3>{{job1.company}}</h3>
+            <h4>{{job1.company}} - {{job1.startDate}} to {{job1.endDate}}</h4>
+            <p>Skills: {% for skill in job1skills %}
+                {{skill.name}}
+            {% endfor %}</p>
+            {{job1.summary | linebreaks }}
+            
+        {% endif %}
+
+        {% if job2 != None %}
+
+            <h3>{{job2.company}}</h3>
+            <h4>{{job2.company}} - {{job2.startDate}} to {{job2.endDate}}</h4>
+            <p>Skills: {% for skill in job2skills %}
+                {{skill.name}}
+            {% endfor %}</p>
+            {{job2.summary | linebreaks }}
+            
+        {% endif %}
+
+        <h2>Applied Projects</h2>
+
+        {% if project0 != None %}
+
+            <h3>{{project0.name}}</h3>
+            <p>Description: {{project0.description}}</p>
+            <p>Skills: {% for skill in project0skills %}
+                {{skill.name}}
+            {% endfor %}</p>
+            <p><a href="{{project0.gh_repo}}">Github</a> ({{project0.stars}} stars) <a href="{{project0.gh_repo}}">Website</a></p>
+            
+        {% endif %}
+
+        {% if project1 != None %}
+
+            <h3>{{project1.name}}</h3>
+            <p>Description: {{project1.description}}</p>
+            <p>Skills: {% for skill in project1skills %}
+                {{skill.name}}
+            {% endfor %}</p>
+            <p><a href="{{project1.gh_repo}}">Github</a> ({{project1.stars}} stars) <a href="{{project1.gh_repo}}">Website</a></p>
+            
+        {% endif %}
+
+        {% if project2 != None %}
+
+            <h3>{{project2.name}}</h3>
+            <p>Description: {{project2.description}}</p>
+            <p>Skills: {% for skill in project2skills %}
+                {{skill.name}}
+            {% endfor %}</p>
+            <p><a href="{{project2.gh_repo}}">Github</a> ({{project2.stars}} stars) <a href="{{project2.gh_repo}}">Website</a></p>
+            
+        {% endif %}
     
     </div>
 

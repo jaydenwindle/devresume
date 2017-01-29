@@ -6,6 +6,7 @@ from forms import WorkEntryForm, EducationEntryForm, ProjectEntryForm, Applicati
 from models import WorkEntry, EducationEntry,SocialProfile, SkillEntry, ProjectEntry, ApplicationEntry, User
 from collections import Counter
 import math
+import collections
 
 # Create your views here.
 def index(request):
@@ -34,13 +35,42 @@ def resume(request, pk):
 
 
     if request.user.is_authenticated():
-        app = Counter(ApplicationEntry.objects.get(pk=pk).desired_skills.all())
-        job_history = WorkEntry.objects.filter(user=request.user)
-        print job_history
-
-        return render(request, 'resume.html', {
+        renderDict = {
             'user': request.user,
-        })
+        }
+        app = Counter(ApplicationEntry.objects.get(pk=pk).desired_skills.all())
+
+        # match jobs
+        job_history = WorkEntry.objects.filter(user=request.user).all()
+        sorted_jobs = {}
+        for item in job_history:
+            counter = Counter(item.skills.all())
+            sorted_jobs[array_similarity(app,counter)] = item
+
+        for i in range(3):
+            renderDict['job' + str(i)] = sorted_jobs[max(sorted_jobs)]
+            del sorted_jobs[max(sorted_jobs.keys())]
+            renderDict['job' + str(i) + "skills"] = renderDict['job' + str(i)].skills.all() 
+            if len(sorted_jobs) == 0:
+                break;
+
+        # match projects
+        job_history = WorkEntry.objects.filter(user=request.user).all()
+        sorted_projects = {}
+        for item in job_history:
+            counter = Counter(item.skills.all())
+            sorted_projects[array_similarity(app,counter)] = item
+            print sorted_projects[array_similarity(app,counter)]
+
+
+        for i in range(3):
+            renderDict['project' + str(i)] = sorted_projects[max(sorted_projects)]
+            del sorted_projects[max(sorted_projects.keys())]
+            renderDict['project' + str(i) + "skills"] = renderDict['job' + str(i)].skills.all() 
+            if len(sorted_projects) == 0:
+                break;
+
+        return render(request, 'resume.html', renderDict)
     else: 
         return redirect('login')
 
