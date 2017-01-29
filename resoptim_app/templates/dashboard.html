@@ -50,7 +50,7 @@
                 <h3>Work History</h3>
                 <hr /> {% for work in work_entries %}
                 <p>{{ work.company }} - {{ work.position }}</p>
-                <p class="text-muted">{{ work.summary }}</p>
+                <div class="text-muted">{{ work.summary | linebreaks }}</div>
                 <a class="btn btn-primary" href="{% url 'update_work_entry' work.id %}">Update</a>
                 <a class="btn btn-danger" href="{% url 'delete_work_entry' work.id %}">Delete</a> {% endfor %}
                 <br>
