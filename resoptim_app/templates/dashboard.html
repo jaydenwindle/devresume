@@ -1,18 +1,16 @@
 {% extends "base.html" %} {% load staticfiles %} {% block content %}
 
 <script>
-
-    $('#myTabs a').click(function (e) {
+    $('#myTabs a').click(function(e) {
         e.preventDefault()
         $(this).tab('show')
     })
-
 </script>
 
 <div class="jumbotron text-center">
     <div class="container">
         <!--<a href="/" class="lang-logo">-->
-            <!--<img src="{% static 'lang-logo.png'%}">-->
+        <!--<img src="{% static 'lang-logo.png'%}">-->
         <!--</a>-->
         <h1>Dashboard</h1>
         <br />
@@ -24,10 +22,10 @@
 
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-        <li role="presentation"><a href="#resume-info" aria-controls="resume-info" role="tab" data-toggle="tab">Resume Info</a></li>
-        <li role="presentation"><a href="#applications" aria-controls="applications" role="tab" data-toggle="tab">Applications</a></li>
-        <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+            <li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+            <li role="presentation"><a href="#resume-info" aria-controls="resume-info" role="tab" data-toggle="tab">Resume Info</a></li>
+            <li role="presentation"><a href="#applications" aria-controls="applications" role="tab" data-toggle="tab">Applications</a></li>
+            <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
         </ul>
 
         <!-- Tab panes -->
@@ -50,15 +48,51 @@
 
 
                 <h3>Work History</h3>
-                <hr />
-                {% for work in work_entries %}
-                    <p>{{ work.company }} - {{ work.position }}</p>
-                    <p class="text-muted">{{ work.summary }}</p>
-                    <a class="btn btn-primary" href="{% url 'update_work_entry' work.id %}">Update</a>
-                    <a class="btn btn-danger" href="{% url 'delete_work_entry' work.id %}">Delete</a>
-                {% endfor %}
-                <hr />
+                <hr /> {% for work in work_entries %}
+                <p>{{ work.company }} - {{ work.position }}</p>
+                <p class="text-muted">{{ work.summary }}</p>
+                <a class="btn btn-primary" href="{% url 'update_work_entry' work.id %}">Update</a>
+                <a class="btn btn-danger" href="{% url 'delete_work_entry' work.id %}">Delete</a> {% endfor %}
+                <br>
+                <br>
                 <a class="btn btn-primary" href="{% url 'create_work_entry' %}">Add New Work Entry</a>
+                <hr />
+
+                <h3>Education</h3>
+                <hr /> {%for school in education_entries %}
+                <p>{{school.institution}}</p>
+                <p> {{school.area}} - {{school.studyType}}</p>
+                <p> {{school.startDate}} - {{school.endDate}}</p>
+                <p> {{school.gpa}}</p>
+                <a class="btn btn-primary" href="{% url 'update_education_entry' school.id %}">Update</a>
+                <a class="btn btn-danger" href="{% url 'delete_education_entry' school.id %}">Delete</a> {% endfor %}
+                <br>
+                <br>
+                <a class="btn btn-primary" href="{% url 'create_education_entry' %}">Add New Education Entry</a>
+                <hr />
+
+                <h3>Social Profiles</h3>
+                <hr /> {%for profile in social_profiles %}
+                <p>{{profile.url}}</p>
+                <a class="btn btn-primary" href="/">Update(not functional)</a>
+                <a class="btn btn-danger" href="/">Delete(not functional)</a> {% endfor %}
+                <br>
+                <br>
+                <a class="btn btn-primary" href="/">Add New Social Profile</a>
+                <hr />
+
+                <h3>Skills</h3>
+                <hr /> {%for skill in skill_entries %}
+                <p>{{skill.name}}</p>
+                <a class="btn btn-primary" href="/">Update(not functional)</a>
+                <a class="btn btn-danger" href="/">Delete(not functional)</a> {% endfor %}
+                <br>
+                <br>
+                <a class="btn btn-primary" href="/">Add New Skill</a>
+                <hr />
+
+
+
 
             </div>
             <div role="tabpanel" class="tab-pane" id="applications">
