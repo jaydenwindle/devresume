@@ -3,38 +3,40 @@
 {% block content %}
 
 <div class="container">
-    <div class="panel text-center">
-        <form class="form-horizontal" method="post">{% csrf_token %}
-            <fieldset>
-                <legend>{{ title  }}</legend>
-                {% for field in form %}
-                    {% if field.errors %}
-                    <div class="form-group error">
-                        <label>{{ field.label  }}</label> 
-                        <div>{{ field }}
-                            <div class="alert alert-danger">
-                            {% for error in  field.errors %}{{ error  }}{% endfor %}
+    <div class="row">
+        <div class="col-md-8 col-md-push-2">
+            <form class="form-horizontal" method="post">{% csrf_token %}
+                <fieldset>
+                    <legend>{{ title  }}</legend>
+                    {% for field in form %}
+                        {% if field.errors %}
+                        <div class="form-group error">
+                            <label>{{ field.label  }}</label> 
+                            <div>{{ field }}
+                                <div class="alert alert-danger">
+                                {% for error in  field.errors %}{{ error  }}{% endfor %}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    {% else %}
-                    <div class="form-group">
-                        <label>{{ field.label  }}</label> 
-                        <div>{{ field }}
-                            {% if field.help_text %}
-                            <p><small class="form-text text-muted">{{ field.help_text  }}</small></p>
-                            {% endif %}
+                        {% else %}
+                        <div class="form-group">
+                            <label>{{ field.label  }}</label> 
+                            <div>{{ field }}
+                                {% if field.help_text %}
+                                <p><small class="form-text text-muted">{{ field.help_text  }}</small></p>
+                                {% endif %}
+                            </div>
                         </div>
-                    </div>
-                    {% endif %}
-                {% endfor %}
-            </fieldset>
-            <br />
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary" >Submit</button>
-            </div>
-        </form>
-    
+                        {% endif %}
+                    {% endfor %}
+                </fieldset>
+                <br />
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" >Submit</button>
+                </div>
+            </form>
+        
+        </div>
     </div>
 </div>
 

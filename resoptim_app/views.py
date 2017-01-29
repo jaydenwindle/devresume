@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import UpdateView, CreateView, DeleteView
 from models import WorkEntry, EducationEntry, User
+from forms import WorkEntryForm
 
 # Create your views here.
 def index(request):
@@ -19,7 +20,7 @@ def index(request):
 
 class WorkEntryCreate(CreateView):
     model = WorkEntry 
-    fields = ['company', 'position', 'summary', 'startDate', 'endDate', 'skills']
+    form_class = WorkEntryForm
     template_name = 'generic_form.html'
     success_url = '/app/'
 

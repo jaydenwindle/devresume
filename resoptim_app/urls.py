@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
-from views import WorkEntryUpdate, WorkEntryCreate, WorkEntryDelete, UserRegister,EducationEntryUpdate, EducationEntryCreate, EducationEntryDelete
+from views import WorkEntryUpdate, WorkEntryCreate, WorkEntryDelete, EducationEntryUpdate, EducationEntryCreate, EducationEntryDelete
 
 admin.autodiscover()
 
