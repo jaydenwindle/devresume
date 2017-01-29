@@ -41,6 +41,12 @@ class WorkEntry(models.Model):
 
 class EducationEntry(models.Model):
     user = models.ForeignKey(User, related_name="education")
+    institution = models.CharField(max_length=200); 
+    area = models.CharField(max_length=200); 
+    studyType = models.CharField(max_length=200); 
+    startDate = models.DateField(); 
+    endDate = models.DateField(); 
+    gpa = DecimalField(max_digits=4, decimal_places=2)
 
 class SkillEntry(models.Model):
     user = models.ForeignKey(User, related_name="skills")
