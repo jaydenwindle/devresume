@@ -74,8 +74,8 @@
                 <h3>Social Profiles</h3>
                 <hr /> {%for profile in social_profiles %}
                 <p>{{profile.url}}</p>
-                <a class="btn btn-primary" href="/">Update(not functional)</a>
-                <a class="btn btn-danger" href="/">Delete(not functional)</a> {% endfor %}
+                <a class="btn btn-primary" href="{% url 'update_social_profile' profile.id %}">Update(not functional)</a>
+                <a class="btn btn-danger" href="{% url 'delete_social_profile' profile.id %}">Delete(not functional)</a> {% endfor %}
                 <br>
                 <br>
                 <a class="btn btn-primary" href="/">Add New Social Profile</a>
@@ -84,21 +84,21 @@
                 <h3>Skills</h3>
                 <hr /> {%for skill in skill_entries %}
                 <p>{{skill.name}}</p>
-                <a class="btn btn-primary" href="/">Update(not functional)</a>
-                <a class="btn btn-danger" href="/">Delete(not functional)</a> {% endfor %}
+                <a class="btn btn-primary" href="/">Update</a>
+                <a class="btn btn-danger" href="/">Delete</a> {% endfor %}
                 <br>
                 <br>
-                <a class="btn btn-primary" href="/">Add New Skill</a>
+                <a class="btn btn-primary " href="/ ">Add New Skill</a>
                 <hr />
 
 
 
 
             </div>
-            <div role="tabpanel" class="tab-pane" id="applications">
+            <div role="tabpanel " class="tab-pane " id="applications ">
 
             </div>
-            <div role="tabpanel" class="tab-pane" id="settings">
+            <div role="tabpanel " class="tab-pane " id="settings ">
 
             </div>
 
@@ -106,7 +106,7 @@
     </div>
 </div>
 <br /><br />
-<div class="alert alert-info text-center" role="alert">
+<div class="alert alert-info text-center " role="alert ">
     Footer .... filler text here I'll' figure out what to put later
 </div>
 </div>
