@@ -41,23 +41,23 @@ a {
     padding: 15px;
 }
 
-#id_skills {
+#id_skills, #id_desired_skills {
     padding-left: 0;
 }
 
-#id_skills li {
+#id_skills li, #id_desired_skills li {
     list-style: none;
     float: left;
     width: 33%;
 }
 
-#id_skills li label {
+#id_skills li label, #id_desired_skills li label {
     float: left;
     line-height: 20px;
     height: 20px;
 }
 
-#id_skills li input {
+#id_skills li input, #id_desired_skills li input{
     float: left;
     width: 20px;
     height: 20px;

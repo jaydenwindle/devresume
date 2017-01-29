@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import WorkEntry, EducationEntry, ProjectEntry
+from .models import WorkEntry, EducationEntry, ProjectEntry, ApplicationEntry
 
 class WorkEntryForm(forms.ModelForm):
     class Meta:
@@ -43,6 +43,19 @@ class ProjectEntryForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        super(WorkEntryForm, self).__init__(*args, **kwargs)
+        super(ProjectEntryForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+
+class ApplicationEntryForm(forms.ModelForm):
+    class Meta:
+        model = ApplicationEntry 
+        fields = ['company_name', 'desired_skills']
+        widgets = {
+            'desired_skills': forms.CheckboxSelectMultiple,
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(ApplicationEntryForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'

@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
-from views import WorkEntryUpdate, WorkEntryCreate, WorkEntryDelete, EducationEntryUpdate, EducationEntryCreate, EducationEntryDelete,SocialProfileUpdate, SocialProfileCreate, SocialProfileDelete,SkillEntryUpdate, SkillEntryCreate, SkillEntryDelete
+from views import WorkEntryUpdate, WorkEntryCreate, WorkEntryDelete, EducationEntryUpdate, EducationEntryCreate, EducationEntryDelete,SocialProfileUpdate, SocialProfileCreate, SocialProfileDelete,SkillEntryUpdate, SkillEntryCreate, SkillEntryDelete, ProjectEntryCreate, ProjectEntryUpdate, ProjectEntryDelete, ApplicationEntryCreate, ApplicationEntryUpdate, ApplicationEntryDelete
 
 
 admin.autodiscover()
@@ -24,5 +24,12 @@ urlpatterns = [
     url(r'^create_skill_entry/$', SkillEntryCreate.as_view(), name='create_skill_entry'),
     url(r'^update_skill_entry/(?P<pk>[\w-]+)$', SkillEntryUpdate.as_view(), name='update_skill_entry'),
     url(r'^delete_skill_entry/(?P<pk>[\w-]+)$', SkillEntryDelete.as_view(), name='delete_skill_entry'),
+    url(r'^create_project_entry/$', ProjectEntryCreate.as_view(), name='create_project_entry'),
+    url(r'^update_project_entry/(?P<pk>[\w-]+)$', ProjectEntryUpdate.as_view(), name='update_project_entry'),
+    url(r'^delete_project_entry/(?P<pk>[\w-]+)$', ProjectEntryDelete.as_view(), name='delete_project_entry'),
+    url(r'^create_application_entry/$', ApplicationEntryCreate.as_view(), name='create_application_entry'),
+    url(r'^update_application_entry/(?P<pk>[\w-]+)$', ApplicationEntryUpdate.as_view(), name='update_application_entry'),
+    url(r'^delete_application_entry/(?P<pk>[\w-]+)$', ApplicationEntryDelete.as_view(), name='delete_application_entry'),
+    url(r'^view_application_resume/(?P<pk>[\w-]+)$', views.resume, name='view_application_resume'),
     
 ]

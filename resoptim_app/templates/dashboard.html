@@ -1,10 +1,7 @@
 {% extends "base.html" %} {% load staticfiles %} {% block content %}
 
 <script>
-    $(document).ready(function() {
-        $('#nav-tabs a[role="tab"]').click(function(e) {
-            e.preventDefault();
-            console.log("hello");
+    $(document).ready(function() { $('#nav-tabs a[role="tab"]').click(function(e) { e.preventDefault(); console.log("hello");
             $(this).tab('show');
         })
 
@@ -101,8 +98,6 @@
                         </div>
                     </div>
 
-
-
                     <div class="col-md-3">
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -110,7 +105,7 @@
                             </div>
                             <div class="panel-body">
                                 {%for profile in social_profiles %}
-                                <p>{{profile.url}}</p>
+                                <p> <a href="{{profile.url}}">{{profile.username}} on {{profile.network}}</a> </p>
                                 <a class="btn btn-primary" href="{% url 'update_social_profile' profile.id %}">Update</a>
                                 <a class="btn btn-danger" href="{% url 'delete_social_profile' profile.id %}">Delete</a> {% endfor %}
                                 <br>
@@ -121,6 +116,26 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Projects</h3>
+                            </div>
+                            <div class="panel-body">
+                                {% for project in project_entries %}
+                                <p>Name: {{project.name}}</p>
+                                <p>Repo: <a href="{{project.gh_repo}}">Github</a></p>
+                                <p>Website: <a href="{{project.website}}">{{ project.website }}</a></p>
+                                <p>Description: {{ project.description }}</p>
+                                <p>Stars: {{ project.stars }}</p>
+                                <a class="btn btn-primary" href="{% url 'update_project_entry' project.id %}">Update</a>
+                                <a class="btn btn-danger" href="{% url 'delete_project_entry' project.id %}">Delete</a> {% endfor %}
+                                <br>
+                                <br>
+                                <a class="btn btn-primary" href="{% url 'create_project_entry' %}">Add New Project</a>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-md-3">
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -144,6 +159,20 @@
             </div>
 
             <div role="tabpanel" class="tab-pane" id="applications">
+
+                <ul class="list-group">
+                    {% for application in application_entries %}
+                        <li class="list-group-item">
+                            {{application.company_name}}
+                            <a class="text-primary" style="padding-left: 10px;" href="{% url 'view_application_resume' application.id %}">View Resume</a>
+                            <a class="text-danger pull-right" style="padding-left: 10px;" href="{% url 'delete_application_entry' application.id %}">Delete</a>
+                            <a class="text-primary pull-right" href="{% url 'update_application_entry' application.id %}">Update</a>
+                        </li>
+                    {% endfor %}
+                    <li class="list-group-item">
+                        <a class="btn btn-primary" href="{% url 'create_application_entry' %}">Add New Application</a>
+                    </li>
+                </ul>
 
             </div>
             <div role="tabpanel" class="tab-pane" id="settings">
