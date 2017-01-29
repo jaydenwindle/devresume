@@ -1,15 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import UpdateView, CreateView, DeleteView
-from forms import WorkEntryForm
-from models import WorkEntry, EducationEntry,SocialProfile, SkillEntry, User
+from forms import WorkEntryForm, EducationEntryForm
+from models import WorkEntry, EducationEntry,SocialProfile, SkillEntry, ProjectEntry, User
 
 # Create your views here.
 def index(request):
     # return HttpResponse('Hello from Python!')
     if request.user.is_authenticated():
-        return render(request, 'dashboard.html', {
-            'user': request.user,
+        return render(request, 'dashboard.html', { 'user': request.user,
             'work_entries': request.user.work.all(),
             'education_entries': request.user.education.all(),
             'social_profiles': request.user.profiles.all(),
@@ -47,7 +46,7 @@ class WorkEntryDelete(DeleteView):
 
 class EducationEntryCreate(CreateView):
     model = EducationEntry 
-    fields = ['institution','area','studyType', 'startDate', 'endDate', 'skills','gpa']
+    form_class = EducationEntryForm
     template_name = 'generic_form.html'
     success_url = '/app/'
 
@@ -57,7 +56,7 @@ class EducationEntryCreate(CreateView):
 
 class EducationEntryUpdate(UpdateView):
     model = EducationEntry 
-    fields = ['institution','area','studyType', 'startDate', 'endDate', 'skills','gpa']
+    form_class = EducationEntryForm
     template_name = 'generic_form.html'
     success_url = '/app/'
 
@@ -122,6 +121,33 @@ class SkillEntryDelete(DeleteView):
     def get_object(self, queryset=None):
         """ Hook to ensure object is owned by request.user. """
         obj = super(SkillEntryDelete, self).get_object()
+        if not obj.user == self.request.user:
+            raise Http404
+        return obj
+
+class ProjectEntryCreate(CreateView):
+    model = ProjectEntry 
+    form_class = WorkEntryForm
+    template_name = 'generic_form.html'
+    success_url = '/app/'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(WorkEntryCreate, self).form_valid(form)
+
+class ProjectEntryUpdate(UpdateView):
+    model = ProjectEntry 
+    form_class = WorkEntryForm
+    template_name = 'generic_form.html'
+    success_url = '/app/'
+
+class ProjectEntryDelete(DeleteView):
+    model = ProjectEntry 
+    template_name = 'generic_delete_form.html'
+    success_url = '/app/'
+    def get_object(self, queryset=None):
+        """ Hook to ensure object is owned by request.user. """
+        obj = super(WorkEntryDelete, self).get_object()
         if not obj.user == self.request.user:
             raise Http404
         return obj

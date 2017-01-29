@@ -2,7 +2,7 @@
 
 <script>
     $(document).ready(function() {
-        $('#nav-tabs a').click(function(e) {
+        $('#nav-tabs a[role="tab"]').click(function(e) {
             e.preventDefault();
             console.log("hello");
             $(this).tab('show');
@@ -126,14 +126,18 @@
                             <div class="panel-heading">
                                 <h3 class="panel-title">Skills</h3>
                             </div>
-                            <div class="panel-body">
+
+                            <ul class="list-group">
                                 {%for skill in skill_entries %}
-                                <p>{{skill.name}}</p>
+                                <li class="list-group-item">{{skill.name}}
                                 <!--<a class="btn btn-primary" href="{% url 'update_skill_entry' skill.id %}">Update</a>-->
-                                <a class="btn btn-danger" href="{% url 'delete_skill_entry' skill.id %}">Delete</a> {% endfor %}
-                                <br>
-                                <br>
-                                <a class="btn btn-primary " href="{% url 'create_skill_entry' %} ">Add New Skill</a></div>
+                                <a class="text-danger pull-right" href="{% url 'delete_skill_entry' skill.id %}">Delete</a>
+                                </li>
+                                {% endfor %}
+                                <li class="list-group-item">
+                                <a class="btn btn-primary" href="{% url 'create_skill_entry' %}">Add new skill</a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>

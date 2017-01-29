@@ -46,14 +46,6 @@ class WorkEntry(models.Model):
     startDate = models.DateField();
     endDate = models.DateField();
 
-class ProjectEntry(models.Model):
-    user = models.ForeignKey(User, related_name="projects")
-    name = models.CharField(max_length=200);
-    gh_repo = models.CharField(max_length=200);
-    website = models.URLField(blank=True);
-    description = models.TextField();
-    skills = models.ManyToManyField(SkillEntry, blank=True)
-
 class EducationEntry(models.Model):
     user = models.ForeignKey(User, related_name="education")
     institution = models.CharField(max_length=200); 
@@ -64,3 +56,16 @@ class EducationEntry(models.Model):
     endDate = models.DateField(); 
     gpa = models.DecimalField(max_digits=4, decimal_places=2)
 
+class ProjectEntry(models.Model):
+    user = models.ForeignKey(User, related_name="projects")
+    name = models.CharField(max_length=200);
+    gh_repo = models.URLField(max_length=200);
+    website = models.URLField(max_length=200, blank=True);
+    description = models.TextField();
+    stars = models.IntegerField();
+    skills = models.ManyToManyField(SkillEntry, blank=True)
+
+class ApplicationEntry(models.Model):
+    user = models.ForeignKey(User, related_name="applications")
+    company_name = models.CharField(max_length=200);
+    desired_skills = models.ManyToManyField(SkillEntry, blank=True)
