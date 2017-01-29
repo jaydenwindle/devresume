@@ -12,7 +12,7 @@
             var row_max = 0;
             console.log('here')
             $('.panel-default').each(function() {
-                if($(this).height() > row_max) {
+                if ($(this).height() > row_max) {
                     row_max = $(this).height();
                 }
             });
@@ -119,12 +119,21 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Skills</h3>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Skills</h3>
+                                </div>
+                                <div class="panel-body">
+                                    {%for skill in skill_entries %}
+                                    <p>{{skill.name}}</p>
+                                    <a class="btn btn-primary" href="{% url 'update_skill_entry' skill.id %}">Update</a>
+                                    <a class="btn btn-danger" href="{% url 'delete_skill_entry' skill.id %}">Delete</a> {% endfor %}
+                                    <br>
+                                    <br>
+                                    <a class="btn btn-primary " href="{% url 'create_skill_entry' %} ">Add New Skill</a></div>
                             </div>
                             <div class="panel-body">
                                 {%for skill in skill_entries %}
@@ -136,6 +145,7 @@
                                 <a class="btn btn-primary " href="{% url 'create_skill_entry' %} ">Add New Skill</a></div>
                         </div>
                     </div>
+
                 </div>
             </div>
 
@@ -143,6 +153,7 @@
 
             </div>
             <div role="tabpanel" class="tab-pane" id="settings">
+
 
             </div>
 
