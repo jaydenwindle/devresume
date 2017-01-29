@@ -63,3 +63,10 @@ a {
     height: 20px;
     margin-right: 10px;
 }
+
+.landing {
+    /*background-image: url(landing.jpeg);*/
+    background-repeat: no-repeat;
+    background-size: 90%;
+    height: 100%;
+}
