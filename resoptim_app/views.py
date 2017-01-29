@@ -8,3 +8,6 @@ def index(request):
         return render(request, 'index.html')
     else: 
         return redirect('login')
+
+def landingPage(request):
+    return render(request, 'index.html')

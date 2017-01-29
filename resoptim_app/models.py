@@ -46,7 +46,7 @@ class EducationEntry(models.Model):
     studyType = models.CharField(max_length=200); 
     startDate = models.DateField(); 
     endDate = models.DateField(); 
-    gpa = DecimalField(max_digits=4, decimal_places=2)
+    gpa = models.DecimalField(max_digits=4, decimal_places=2)
 
 class SkillEntry(models.Model):
     user = models.ForeignKey(User, related_name="skills")
