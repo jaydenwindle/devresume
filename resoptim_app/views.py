@@ -30,8 +30,12 @@ class WorkEntryCreate(CreateView):
 
 class WorkEntryUpdate(UpdateView):
     model = WorkEntry 
+<<<<<<< HEAD
     form_class = WorkEntryForm
     fields = ['company', 'position', 'summary']
+=======
+    fields = ['company', 'position', 'summary', 'startDate', 'endDate', 'skills']
+>>>>>>> 71cfa9dee9b2ad6b55322aab2e77a4b82959bbff
     template_name = 'generic_form.html'
     success_url = '/app/'
 
@@ -48,7 +52,7 @@ class WorkEntryDelete(DeleteView):
 
 class EducationEntryCreate(CreateView):
     model = EducationEntry 
-    fields = ['company', 'position', 'summary', 'startDate', 'endDate']
+    fields = ['institution','area','studyType', 'startDate', 'endDate', 'skills','gpa']
     template_name = 'generic_form.html'
     success_url = '/app/'
 
@@ -58,17 +62,44 @@ class EducationEntryCreate(CreateView):
 
 class EducationEntryUpdate(UpdateView):
     model = EducationEntry 
-    fields = ['company', 'position', 'summary']
+    fields = ['institution','area','studyType', 'startDate', 'endDate', 'skills','gpa']
     template_name = 'generic_form.html'
     success_url = '/app/'
 
 class EducationEntryDelete(DeleteView):
     model = EducationEntry 
-    template_name = 'delete_work_entry.html'
+    template_name = 'delete_education_entry.html'
     success_url = '/app/'
     def get_object(self, queryset=None):
         """ Hook to ensure object is owned by request.user. """
         obj = super(EducationEntryDelete, self).get_object()
+        if not obj.user == self.request.user:
+            raise Http404
+        return obj
+
+class SocialProfileCreate(CreateView):
+    model = SocialProfile
+    fields = ['network','username','url']
+    template_name = 'generic_form.html'
+    success_url = '/app/'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(SocialProfileCreate, self).form_valid(form)
+
+class SocialProfileUpdate(UpdateView):
+    model = SocialProfile
+    fields = ['network','username','url']
+    template_name = 'generic_form.html'
+    success_url = '/app/'
+
+class SocialProfileDelete(DeleteView):
+    model = SocialProfile
+    template_name = 'delete_social_profile.html'
+    success_url = '/app/'
+    def get_object(self, queryset=None):
+        """ Hook to ensure object is owned by request.user. """
+        obj = super(SocialProfileDelete, self).get_object()
         if not obj.user == self.request.user:
             raise Http404
         return obj
