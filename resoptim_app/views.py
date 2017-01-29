@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import UpdateView, CreateView, DeleteView
-from models import WorkEntry 
+from models import WorkEntry, EducationEntry, User
 
 # Create your views here.
 def index(request):
@@ -17,16 +17,21 @@ def index(request):
     else: 
         return redirect('login')
 
+class UserRegister(CreateView):
+    model = User 
+    fields = ['first_name', 'last_name', 'username', 'email']
+    template_name = 'generic_form.html'
+    success_url = 'app/login/'
+
 class WorkEntryCreate(CreateView):
     model = WorkEntry 
-    fields = ['company', 'position', 'summary']
+    fields = ['company', 'position', 'summary', 'startDate', 'endDate', 'skills']
     template_name = 'generic_form.html'
     success_url = '/app/'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(WorkEntryCreate, self).form_valid(form)
-        
 
 class WorkEntryUpdate(UpdateView):
     model = WorkEntry 
@@ -41,7 +46,34 @@ class WorkEntryDelete(DeleteView):
     def get_object(self, queryset=None):
         """ Hook to ensure object is owned by request.user. """
         obj = super(WorkEntryDelete, self).get_object()
-        if not obj.owner == self.request.user:
+        if not obj.user == self.request.user:
+            raise Http404
+        return obj
+
+class EducationEntryCreate(CreateView):
+    model = EducationEntry 
+    fields = ['company', 'position', 'summary', 'startDate', 'endDate']
+    template_name = 'generic_form.html'
+    success_url = '/app/'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(EducationEntryCreate, self).form_valid(form)
+
+class EducationEntryUpdate(UpdateView):
+    model = EducationEntry 
+    fields = ['company', 'position', 'summary']
+    template_name = 'generic_form.html'
+    success_url = '/app/'
+
+class EducationEntryDelete(DeleteView):
+    model = EducationEntry 
+    template_name = 'delete_work_entry.html'
+    success_url = '/app/'
+    def get_object(self, queryset=None):
+        """ Hook to ensure object is owned by request.user. """
+        obj = super(EducationEntryDelete, self).get_object()
+        if not obj.user == self.request.user:
             raise Http404
         return obj
 
