@@ -32,67 +32,108 @@
         <div class="tab-content text-left">
 
             <div role="tabpanel" class="tab-pane active" id="profile">
-                <h3>Bio</h3>
-                {{user.bio}}
-                <h3>Location</h3>
-                {{user.location}}
-                <h3>Phone</h3>
-                {{user.phone}}
-                <h3>Website</h3>
-                <a href="{{user.website}}">{{user.website}}</a>
-                <br /><br />
-                <a class="btn btn-primary" data-toggle="modal" data-target="#user_profile_edit_modal">Edit Profile</a>
-            </div>
 
-            <div role="tabpanel" class="tab-pane" id="resume-info">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Profile</h3>
+                            </div>
+                            <div class="panel-body">
+                                <h3>Bio</h3>
+                                {{user.bio}}
+                                <h3>Location</h3>
+                                {{user.location}}
+                                <h3>Phone</h3>
+                                {{user.phone}}
+                                <h3>Website</h3>
+                                <a href="{{user.website}}">{{user.website}}</a>
+                                <br /><br />
+                                <a class="btn btn-primary" data-toggle="modal" data-target="#user_profile_edit_modal">Edit Profile</a>
+                            </div>
+                        </div>
+                    </div>
 
 
-                <h3>Work History</h3>
-                <hr /> {% for work in work_entries %}
-                <p>{{ work.company }} - {{ work.position }}</p>
-                <div class="text-muted">{{ work.summary | linebreaks }}</div>
-                <a class="btn btn-primary" href="{% url 'update_work_entry' work.id %}">Update</a>
-                <a class="btn btn-danger" href="{% url 'delete_work_entry' work.id %}">Delete</a> {% endfor %}
-                <br>
-                <br>
-                <a class="btn btn-primary" href="{% url 'create_work_entry' %}">Add New Work Entry</a>
-                <hr />
-
-                <h3>Education</h3>
-                <hr /> {%for school in education_entries %}
-                <p>{{school.institution}}</p>
-                <p> {{school.area}} - {{school.studyType}}</p>
-                <p> {{school.startDate}} - {{school.endDate}}</p>
-                <p> {{school.gpa}}</p>
-                <a class="btn btn-primary" href="{% url 'update_education_entry' school.id %}">Update</a>
-                <a class="btn btn-danger" href="{% url 'delete_education_entry' school.id %}">Delete</a> {% endfor %}
-                <br>
-                <br>
-                <a class="btn btn-primary" href="{% url 'create_education_entry' %}">Add New Education Entry</a>
-                <hr />
-
-                <h3>Social Profiles</h3>
-                <hr /> {%for profile in social_profiles %}
-                <p>{{profile.url}}</p>
-                <a class="btn btn-primary" href="{% url 'update_social_profile' profile.id %}">Update</a>
-                <a class="btn btn-danger" href="{% url 'delete_social_profile' profile.id %}">Delete</a> {% endfor %}
-                <br>
-                <br>
-                <a class="btn btn-primary" href="/">Add New Social Profile</a>
-                <hr />
-
-                <h3>Skills</h3>
-                <hr /> {%for skill in skill_entries %}
-                <p>{{skill.name}}</p>
-                <a class="btn btn-primary" href="/">Update</a>
-                <a class="btn btn-danger" href="/">Delete</a> {% endfor %}
-                <br>
-                <br>
-                <a class="btn btn-primary " href="/ ">Add New Skill</a>
-                <hr />
+                    <!--div role="tabpanel" class="tab-pane" id="resume-info"-->
 
 
 
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Work History</h3>
+                            </div>
+                            <div class="panel-body">
+                                {% for work in work_entries %}
+                                <p>{{ work.company }} - {{ work.position }}</p>
+                                <div class="text-muted">{{ work.summary | linebreaks }}</div>
+                                <a class="btn btn-primary" href="{% url 'update_work_entry' work.id %}">Update</a>
+                                <a class="btn btn-danger" href="{% url 'delete_work_entry' work.id %}">Delete</a> {% endfor %}
+                                <br>
+                                <br>
+                                <a class="btn btn-primary" href="{% url 'create_work_entry' %}">Add New Work Entry</a> </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Education</h3>
+                            </div>
+                            <div class="panel-body">
+                                {%for school in education_entries %}
+                                <p>{{school.institution}}</p>
+                                <p> {{school.area}} - {{school.studyType}}</p>
+                                <p> {{school.startDate}} - {{school.endDate}}</p>
+                                <p> {{school.gpa}}</p>
+                                <a class="btn btn-primary" href="{% url 'update_education_entry' school.id %}">Update</a>
+                                <a class="btn btn-danger" href="{% url 'delete_education_entry' school.id %}">Delete</a> {% endfor %}
+                                <br>
+                                <br>
+                                <a class="btn btn-primary" href="{% url 'create_education_entry' %}">Add New Education Entry</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Social Profiles</h3>
+                            </div>
+                            <div class="panel-body">
+                                {%for profile in social_profiles %}
+                                <p>{{profile.url}}</p>
+                                <a class="btn btn-primary" href="{% url 'update_social_profile' profile.id %}">Update</a>
+                                <a class="btn btn-danger" href="{% url 'delete_social_profile' profile.id %}">Delete</a> {% endfor %}
+                                <br>
+                                <br>
+                                <a class="btn btn-primary" href="{% url 'create_social_profile' %}">Add New Social Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Skills</h3>
+                            </div>
+                            <div class="panel-body">
+                                {%for skill in skill_entries %}
+                                <p>{{skill.name}}</p>
+                                <a class="btn btn-primary" href="{% url 'update_skill_entry' skill.id %}">Update</a>
+                                <a class="btn btn-danger" href="{% url 'delete_skill_entry' skill.id %}">Delete</a> {% endfor %}
+                                <br>
+                                <br>
+                                <a class="btn btn-primary " href="{% url 'create_skill_entry' %} ">Add New Skill</a></div>
+                        </div>
+                    </div>
+
+
+
+                </div>
 
             </div>
             <div role="tabpanel " class="tab-pane " id="applications ">

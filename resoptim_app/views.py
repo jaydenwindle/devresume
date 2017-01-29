@@ -36,7 +36,7 @@ class WorkEntryUpdate(UpdateView):
 
 class WorkEntryDelete(DeleteView):
     model = WorkEntry 
-    template_name = 'delete_work_entry.html'
+    template_name = 'generic_delete_form.html'
     success_url = '/app/'
     def get_object(self, queryset=None):
         """ Hook to ensure object is owned by request.user. """
@@ -63,7 +63,7 @@ class EducationEntryUpdate(UpdateView):
 
 class EducationEntryDelete(DeleteView):
     model = EducationEntry 
-    template_name = 'delete_education_entry.html'
+    template_name = 'generic_delete_form.html'
     success_url = '/app/'
     def get_object(self, queryset=None):
         """ Hook to ensure object is owned by request.user. """
@@ -90,7 +90,7 @@ class SocialProfileUpdate(UpdateView):
 
 class SocialProfileDelete(DeleteView):
     model = SocialProfile
-    template_name = 'delete_social_profile.html'
+    template_name = 'generic_delete_form.html'
     success_url = '/app/'
     def get_object(self, queryset=None):
         """ Hook to ensure object is owned by request.user. """
@@ -117,7 +117,7 @@ class SkillEntryUpdate(UpdateView):
 
 class SkillEntryDelete(DeleteView):
     model = SkillEntry
-    template_name = 'delete_skill.html'
+    template_name = 'generic_delete_form.html'
     success_url = '/app/'
     def get_object(self, queryset=None):
         """ Hook to ensure object is owned by request.user. """
