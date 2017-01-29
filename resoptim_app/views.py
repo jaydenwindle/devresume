@@ -11,7 +11,7 @@ def index(request):
             'user': request.user,
             'work_entries': request.user.work.all(),
             'education_entries': request.user.education.all(),
-            'social_profiles': request.user.social.all(),
+            'social_profiles': request.user.profiles.all(),
             'skill_entries': request.user.skills.all()
         })
     else: 
@@ -22,6 +22,11 @@ class WorkEntryCreate(CreateView):
     fields = ['company', 'position', 'summary']
     template_name = 'generic_form.html'
     success_url = '/app/'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(WorkEntryCreate, self).form_valid(form)
+        
 
 class WorkEntryUpdate(UpdateView):
     model = WorkEntry 
