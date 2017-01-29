@@ -1,0 +1,78 @@
+{% extends "base.html" %} {% load staticfiles %} {% block content %}
+
+<script>
+
+    $('#myTabs a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
+
+</script>
+
+<div class="jumbotron text-center">
+    <div class="container">
+        <!--<a href="/" class="lang-logo">-->
+            <!--<img src="{% static 'lang-logo.png'%}">-->
+        <!--</a>-->
+        <h1>Dashboard</h1>
+        <br />
+    </div>
+</div>
+
+<div class="container">
+    <div id="nav-tabs">
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+        <li role="presentation"><a href="#resume-info" aria-controls="resume-info" role="tab" data-toggle="tab">Resume Info</a></li>
+        <li role="presentation"><a href="#applications" aria-controls="applications" role="tab" data-toggle="tab">Applications</a></li>
+        <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content text-left">
+
+            <div role="tabpanel" class="tab-pane active" id="profile">
+                <h3>Bio</h3>
+                {{user.bio}}
+                <h3>Location</h3>
+                {{user.location}}
+                <h3>Phone</h3>
+                {{user.phone}}
+                <h3>Website</h3>
+                <a href="{{user.website}}">{{user.website}}</a>
+                <br /><br />
+                <a class="btn btn-primary" data-toggle="modal" data-target="#user_profile_edit_modal">Edit Profile</a>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="resume-info">
+
+
+                <h3>Work History</h3>
+                <hr />
+                {% for work in work_entries %}
+                    <p>{{ work.company }} - {{ work.position }}</p>
+                    <p class="text-muted">{{ work.summary }}</p>
+                    <a class="btn btn-primary" href="{% url 'update_work_entry' work.id %}">Update</a>
+                {% endfor %}
+                <hr />
+                <a class="btn btn-primary" href="{% url 'create_work_entry' %}">Add New Work Entry</a>
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="applications">
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="settings">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<br /><br />
+<div class="alert alert-info text-center" role="alert">
+    Footer .... filler text here I'll' figure out what to put later
+</div>
+</div>
+{% endblock %}

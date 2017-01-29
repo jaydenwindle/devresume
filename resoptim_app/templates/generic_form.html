@@ -1,10 +1,9 @@
-{% extends 'base.html' %}
-
-{% block title %}Login{% endblock %}
+{% extends 'base.html' %} 
 
 {% block content %}
-    <div class="container text-center">
-        <h2>Login</h2>
+
+<div class="container">
+    <div class="panel text-center">
         <form class="form-horizontal" method="post">{% csrf_token %}
             <fieldset>
                 <legend>{{ title  }}</legend>
@@ -35,5 +34,8 @@
                 <button type="submit" class="btn btn-primary" >Submit</button>
             </div>
         </form>
+    
     </div>
-{% endblock %}
+</div>
+
+{% endblock content %}

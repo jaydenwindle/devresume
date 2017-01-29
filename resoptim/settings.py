@@ -139,4 +139,4 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 AUTH_USER_MODEL = 'resoptim_app.User'
 
 # Custom login redirect
-LOGIN_REDIRECT_URL = 'app_index'
+LOGIN_REDIRECT_URL = 'dashboard'
