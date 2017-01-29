@@ -17,12 +17,6 @@ def index(request):
     else: 
         return redirect('login')
 
-class UserRegister(CreateView):
-    model = User 
-    fields = ['first_name', 'last_name', 'username', 'email']
-    template_name = 'generic_form.html'
-    success_url = 'app/login/'
-
 class WorkEntryCreate(CreateView):
     model = WorkEntry 
     fields = ['company', 'position', 'summary', 'startDate', 'endDate', 'skills']
