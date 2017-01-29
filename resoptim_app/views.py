@@ -30,12 +30,8 @@ class WorkEntryCreate(CreateView):
 
 class WorkEntryUpdate(UpdateView):
     model = WorkEntry 
-<<<<<<< HEAD
     form_class = WorkEntryForm
-    fields = ['company', 'position', 'summary']
-=======
     fields = ['company', 'position', 'summary', 'startDate', 'endDate', 'skills']
->>>>>>> 71cfa9dee9b2ad6b55322aab2e77a4b82959bbff
     template_name = 'generic_form.html'
     success_url = '/app/'
 
