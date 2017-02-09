@@ -34,7 +34,7 @@
                         <a class="btn btn-default" href="{% url 'logout' %}">Logout</a>
                     {% else %}
                         <p class="navbar-text">Not signed in.</p>
-                        <a class="btn btn-default" href="{% url 'login' %}">Login with Github</a>
+                        <a class="btn btn-default" href="{% url 'social:begin' 'github' %}">Login with Github</a>
                     {% endif %}
                 </div>
             </div><!--/.nav-collapse -->
