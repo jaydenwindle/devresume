@@ -24,7 +24,7 @@ def index(request):
             'application_entries': request.user.applications.all(),
         })
     else:
-        return redirect('login')
+        return redirect('social:begin')
 
 def resume(request, pk):
 

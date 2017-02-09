@@ -3,7 +3,6 @@ Django settings for gettingstarted project, on Heroku. For more info, see:
 https://github.com/heroku/heroku-django-template
 
 For more information on this file, see https://docs.djangoproject.com/en/1.8/topics/settings/
-
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
 """
@@ -36,6 +35,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django', # social login
     'devresume_app',
 )
 
@@ -137,6 +137,14 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # Custom user model for custom fields
 AUTH_USER_MODEL = 'devresume_app.User'
+
+# login with github
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+SOCIAL_AUTH_GITHUB_KEY = '1af179b64a9f4030deeb'
+SOCIAL_AUTH_GITHUB_SECRET = '0ed01ea192e13ad4818cfdbe90a1ac1fc1220507'
 
 # Custom login redirect
 LOGIN_REDIRECT_URL = 'dashboard'
