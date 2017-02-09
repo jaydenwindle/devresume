@@ -1,1 +1,1 @@
-web: gunicorn resoptim.wsgi --log-file -
+web: gunicorn devresume.wsgi --log-file -

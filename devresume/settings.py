@@ -36,7 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'resoptim_app',
+    'devresume_app',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -50,7 +50,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'resoptim.urls'
+ROOT_URLCONF = 'devresume.urls'
 
 TEMPLATES = [
     {
@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'resoptim.wsgi.application'
+WSGI_APPLICATION = 'devresume.wsgi.application'
 
 
 # Database
@@ -136,7 +136,7 @@ STATICFILES_DIRS = (
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # Custom user model for custom fields
-AUTH_USER_MODEL = 'resoptim_app.User'
+AUTH_USER_MODEL = 'devresume_app.User'
 
 # Custom login redirect
 LOGIN_REDIRECT_URL = 'dashboard'
