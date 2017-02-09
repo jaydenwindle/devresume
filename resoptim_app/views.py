@@ -13,7 +13,6 @@ import json
 
 # Create your views here.
 def index(request):
-    # return HttpResponse('Hello from Python!')
     if request.user.is_authenticated():
         return render(request, 'dashboard.html', {
             'user': request.user,
@@ -64,7 +63,6 @@ def resume(request, pk):
         for item in job_history:
             counter = Counter(item.skills.all())
             sorted_projects[array_similarity(app,counter)] = item
-            print sorted_projects[array_similarity(app,counter)]
 
 
         for i in range(3):
@@ -77,6 +75,11 @@ def resume(request, pk):
         return render(request, 'resume.html', renderDict)
     else:
         return redirect('login')
+
+def ghImport(request):
+    username = request.user.profiles.filter(network="GH").all()[0].username
+    return HttpResponse(githubProfile(username))
+
 
 class WorkEntryCreate(LoginRequiredMixin, CreateView):
     model = WorkEntry
@@ -247,11 +250,10 @@ def landingPage(request):
     })
 
 # //====================GITHUB INFORMATION=====================//
-def githubProfile():
-    userName = raw_input("Enter user github name: ")
+def githubProfile(userName):
     userDict = {}
-    username = "atlasmaxima"
-    password = "389c60b741df216a31263bcee43d0769b6d916a0"
+    username = "linpeng06"
+    password = "059ce45ff903cfc0b077be31b53695088e613aa1"
     request = urllib2.Request("https://api.github.com/users/"+userName)
     base64string = base64.b64encode('%s:%s' % (username, password))
     request.add_header("Authorization", "Basic %s" % base64string)
@@ -259,6 +261,7 @@ def githubProfile():
     readFile = result.read()
     jsonLoads = json.loads(readFile)
     profileBasic = json.dumps(jsonLoads, indent=2)
+    print profileBasic
 
     # update dictionary
     userDict.update({'blog': jsonLoads['blog'], 'location': jsonLoads['location'],
@@ -295,3 +298,4 @@ def githubProfile():
     #
     # print("The total repo from " + userDict['name'] + " is ")
     # print(totalList[0])
+    return [profileBasic, totalList]

@@ -82,6 +82,15 @@
             <p><a href="{{project2.gh_repo}}">Github</a> ({{project2.stars}} stars) <a href="{{project2.gh_repo}}">Website</a></p>
             
         {% endif %}
+
+        <h2>Education</h2>
+
+        {%for school in education_entries %}
+            <h4>{{school.institution}}</h4>
+            <p> {{school.area}} - {{school.studyType}}</p>
+            <p> {{school.startDate}} - {{school.endDate}}</p>
+            <p> {{school.gpa}}</p>
+        {% endfor %}
     
     </div>
 

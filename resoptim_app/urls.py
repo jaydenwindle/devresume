@@ -31,5 +31,6 @@ urlpatterns = [
     url(r'^update_application_entry/(?P<pk>[\w-]+)$', ApplicationEntryUpdate.as_view(), name='update_application_entry'),
     url(r'^delete_application_entry/(?P<pk>[\w-]+)$', ApplicationEntryDelete.as_view(), name='delete_application_entry'),
     url(r'^view_application_resume/(?P<pk>[\w-]+)$', views.resume, name='view_application_resume'),
+    url(r'^import_gh_projects/$', views.ghImport, name='import_gh_projects'),
     
 ]

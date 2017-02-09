@@ -1,10 +1,14 @@
 .navbar {
-    background: #99D3DF;
+    background: #FFF;
     margin: 0;
-    font-family: 'Oswald';
+    font-family: 'Nunito';
     font-size: 18px;
     padding: 20px;
     color: #E9E9E9;
+    -webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
+    border-radius: 0px;
 }
 
 .navbar .navbar-brand {
@@ -19,15 +23,43 @@
     padding: 15px;
 }
 
+body {
+    background: #00d2ff; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left bottom, #00d2ff , #3a7bd5); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left bottom, #00d2ff , #3a7bd5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.jumbotron {
+    background: transparent;
+    color: #fff;
+}
+
+#about-us {
+    color: #fff;
+}
+
 .content {
-    background-color: #E9E9E9;
+    background-color: transparent;
     margin: 0;
     width: 100%;
-    font-family: 'Oswald';
+    font-family: 'Nunito';
 }
 
 a {
     color: #88BBD6;
+}
+
+#nav-tabs li[role="presentation"] a {
+    color: #fff;
+    font-size: 20px;
+}
+
+#nav-tabs li a:hover {
+    color: #333;
+}
+
+#nav-tabs li.active a {
+    color: #333;
 }
 
 #nav-tabs .tab-pane {
@@ -68,11 +100,13 @@ a {
     margin-right: 10px;
 }
 
-.landing {
-    /*background-image: url(landing.jpeg);
-    background-repeat: no-repeat;
-    background-size: 90%;*/
-    height: 100%;
+.skill {
+    border: 1px solid #ccc;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    display: inline-block;
 }
 
 .summary {

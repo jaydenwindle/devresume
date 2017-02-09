@@ -3,16 +3,11 @@
 <div>
     <div class="jumbotron text-center landing">
         <div class="container">
-            <!--<a href="/" class="lang-logo">-->
-            <!--<img src="{% static 'lang-logo.png'%}">-->
-            <!--</a>-->
             <h1>Welcome to ResOptim!</h1>
-            <br /><br />
             <p>The perfect resume for every situation</p>
-            <br /><br />
+            <br />
             <a type="button" class="btn btn-lg btn-default" href="#about-us"><span class="glyphicon glyphicon-flash"></span> What We Do</a>
-            <br /><br />
-            <a type="button" class="btn btn-lg btn-primary" href="{% url 'login' %}"><span class="glyphicon glyphicon-user"></span> Login</a>
+            <a type="button" class="btn btn-lg btn-default" href="{% url 'login' %}"><span class="glyphicon glyphicon-user"></span> Login</a>
         </div>
     </div>
 
@@ -20,8 +15,7 @@
 
         <h2 class="text-center">The Inspiration</h2>
         <p class="summary">
-            As young developers in co-op, we generally submit our resume to a LOT of different companies. As everyone knows, it's important to optimize your resume for the position you are applying to. But how do we do that? By hand, using Word or Google Docs or
-            what have you. And when you're trying to send out 20 or so applications to different companies, that's a lot of work! As chronically lazy developers, we decided to automate the process.</p>
+            As young developers in co-op, we generally submit our resume to a LOT of different companies. As everyone knows, it's important to optimize your resume for the position you are applying to. But how do we do that? By hand, using Word or Google Docs (or maybe LATEX if you're a keener). When you're trying to send out 20 or more applications to different companies, that's a lot of work! As chronically lazy developers, we decided to automate the process.</p>
 
 
         <h2 class="text-center">What We Do</h2>
@@ -33,8 +27,5 @@
     </div>
 
     <br /><br />
-    <div class="alert alert-info text-center" role="alert">
-        More Content Coming Soon!!!
-    </div>
 </div>
 {% endblock %}
