@@ -14,16 +14,12 @@ import json
 # Create your views here.
 def index(request):
     if request.user.is_authenticated():
-        return render(request, 'dashboard.html', {
-            'user': request.user,
-            'work_entries': request.user.work.all(),
-            'education_entries': request.user.education.all(),
-            'project_entries': request.user.projects.all(),
-            'skill_entries': request.user.skills.all(),
-            'application_entries': request.user.applications.all(),
-        })
+        return render(request, 'dashboard.html');
     else:
         return redirect('landingpage')
+
+def resume_info(request):
+    return render(request, 'resume_info.html');
 
 def resume(request, pk):
 
@@ -74,6 +70,7 @@ def resume(request, pk):
         return render(request, 'resume.html', renderDict)
     else:
         return redirect('login')
+
 
 def ghImport(request):
     username = request.user.profiles.filter(network="GH").all()[0].username

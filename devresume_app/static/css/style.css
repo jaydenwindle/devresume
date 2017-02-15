@@ -1,114 +1,189 @@
-.navbar {
-    background: #FFF;
-    margin: 0;
-    font-family: 'Nunito';
-    font-size: 18px;
-    padding: 20px;
-    color: #E9E9E9;
-    -webkit-box-shadow: 0 8px 6px -6px #999;
-    -moz-box-shadow: 0 8px 6px -6px #999;
-    box-shadow: 0 8px 6px -6px #999;
-    border-radius: 0px;
-}
-
-.navbar .navbar-brand {
-    font-size: 25px;
-}
-
-.navbar .navbar-text {
-    line-height: 20px;
-}
-
-.navbar .btn {
-    padding: 15px;
-}
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
 
 body {
-    background: #00d2ff; /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left bottom, #00d2ff , #3a7bd5); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left bottom, #00d2ff , #3a7bd5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-color: #002b36;
 }
+
+/*===============================================
+ * Typography 
+ *=============================================*/
+
+/* Extra small devices (phones, less than 768px) */
+
+h1, h2, h3, h4, h5, h6, p, a, li {
+    font-family: "Roboto Mono";
+    color: #93a1a1;
+}
+
+.btn-primary {
+    background-color: #2aa198;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #6c71c4;
+    border: none;
+}
+
+.btn-massive {
+    background-color: #2aa198;
+    border: none;
+    padding: 40px 0;
+    margin-bottom: 30px;
+}
+.btn-massive:hover {
+    background-color: #6c71c4;
+    cursor: pointer;
+}
+.btn-massive i {
+    display: block;
+    margin-bottom: 20px;
+    font-size: 60px;
+    color: #eee8d5;
+}
+.btn-massive p {
+    font-family: "Roboto Mono";
+    margin-bottom: 0;
+    font-size: 20px;
+    color: #eee8d5;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 786px) {
+
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+}
+
+/*===============================================
+ * Header 
+ *=============================================*/
+
+/* Extra small devices (phones, less than 768px) */
+
+nav {
+    background-color: transparent;
+    font-family: "Roboto Mono";
+}
+
+nav .navbar-brand {
+    margin-left: 0px !important;
+}
+
+nav .navbar-toggle {
+    padding-right: 15px;
+    margin-right: 0;
+}
+nav .navbar-toggle .icon-bar {
+    background-color: #93a1a1;
+}
+
+nav a, nav p {
+    color: #93a1a1 !important;
+    transition: all 0.3s ease;
+}
+
+nav .navbar-text {
+    margin-right: 0;
+}
+
+nav a:hover {
+    color: #6c71c4 !important;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 786px) {
+
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+}
+
+/*===============================================
+ * Content 
+ *=============================================*/
+
+/* Extra small devices (phones, less than 768px) */
 
 .jumbotron {
-    background: transparent;
-    color: #fff;
-}
-
-#about-us {
-    color: #fff;
-}
-
-.content {
     background-color: transparent;
-    margin: 0;
-    width: 100%;
-    font-family: 'Nunito';
+    color: #93a1a1;
 }
 
-a {
-    color: #88BBD6;
-}
-
-#nav-tabs li[role="presentation"] a {
-    color: #fff;
-    font-size: 20px;
-}
-
-#nav-tabs li a:hover {
-    color: #333;
-}
-
-#nav-tabs li.active a {
-    color: #333;
-}
-
-#nav-tabs .tab-pane {
-    background-color: #fff;
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-right-radius: 4px;
+.tab-pane {
+    background-color: #93a1a1;
     padding: 15px;
 }
 
-#id_skills,
-#id_desired_skills {
-    padding-left: 0;
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 786px) {
+
 }
 
-#id_skills li,
-#id_desired_skills li {
-    list-style: none;
-    float: left;
-    width: 33%;
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
 }
 
-#id_skills li label,
-#id_desired_skills li label {
-    float: left;
-    line-height: 20px;
-    height: 20px;
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
 }
 
-#id_skills li input,
-#id_desired_skills li input {
-    float: left;
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
+/*===============================================
+ * Footer 
+ *=============================================*/
+
+/* Extra small devices (phones, less than 768px) */
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 786px) {
+
 }
 
-.skill {
-    border: 1px solid #ccc;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    padding: 5px 10px;
-    border-radius: 4px;
-    display: inline-block;
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
 }
 
-.summary {
-    font-size: 16pt;
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+}
+
+/*===============================================
+ * Media Queries 
+ *=============================================*/
+
+/* Extra small devices (phones, less than 768px) */
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 786px) {
+
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
 }
