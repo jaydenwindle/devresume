@@ -36,15 +36,15 @@
 
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+            <li role="presentation" class="active"><a href="#resume-info" aria-controls="resume-info" role="tab" data-toggle="tab">Resume Info</a></li>
             <li role="presentation"><a href="#applications" aria-controls="applications" role="tab" data-toggle="tab">Applications</a></li>
-            <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+            <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Profile Settings</a></li>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content text-left">
 
-            <div role="tabpanel" class="tab-pane active" id="profile">
+            <div role="tabpanel" class="tab-pane active" id="resume-info">
                 <div class="row">
                     <div class="col-md-8">
                         <div class="panel panel-default">
@@ -92,30 +92,10 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Skills</h3>
-                            </div>
-                            <div class="panel-body">
-                                {%for skill in skill_entries %}
-                                <span class="skill">
-                                    {{skill.name}}
-                                    <a class="text-danger" href="{% url 'delete_skill_entry' skill.id %}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-                                </span>
-                                {% endfor %}
-                                <br /><br />
-                                <a class="btn btn-primary" href="{% url 'create_skill_entry' %}">Add new skill</a>
-                            </div>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-md-4">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Profile</h3>
+                                <h3 class="panel-title">About Me</h3>
                             </div>
                             <div class="panel-body">
                                 <p>Bio - {{user.bio}}</p>
@@ -123,7 +103,7 @@
                                 <p>Phone - {{user.phone}}</p>
                                 <p>Website - <a href="{{user.website}}">{{user.website}}</a></p>
                                 <br /><br />
-                                <a class="btn btn-primary" data-toggle="modal" data-target="#user_profile_edit_modal">Edit Profile</a>
+                                <a class="btn btn-primary" href="{% url 'edit_user_profile' request.user.id %}">Edit Profile</a>
                             </div>
                         </div>
                     </div>
@@ -141,31 +121,25 @@
                                 <p> {{school.gpa}}</p>
                                 <a class="btn btn-primary" href="{% url 'update_education_entry' school.id %}">Update</a>
                                 <a class="btn btn-danger" href="{% url 'delete_education_entry' school.id %}">Delete</a> {% endfor %}
-                                <br>
-                                <br>
                                 <a class="btn btn-primary" href="{% url 'create_education_entry' %}">Add New Education Entry</a>
                             </div>
                         </div>
                     </div>
-
                     <div class="col-md-4">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Social Profiles</h3>
+                                <h3 class="panel-title">Skills</h3>
                             </div>
                             <div class="panel-body">
-                                {%for profile in social_profiles %}
-                                <p> <a href="{{profile.url}}">{{profile.username}} on {{profile.network}}</a> </p>
-                                {% if profile.network == 'GH' %}
-                                    <a class="btn btn-primary btn-block" href="{% url 'import_gh_projects' %}">Import GH Projects</a>
-                                    <br />
-                                {% endif %}
-                                <a class="btn btn-primary" href="{% url 'update_social_profile' profile.id %}">Update</a>
-                                <a class="btn btn-danger" href="{% url 'delete_social_profile' profile.id %}">Delete</a> {% endfor %}
-                                <br>
-                                <br>
-                                <a class="btn btn-primary" href="{% url 'create_social_profile' %}">Add New Social Profile</a>
+                                {%for skill in skill_entries %}
+                                <span class="skill">
+                                    {{skill.name}}
+                                    <a class="text-danger" href="{% url 'delete_skill_entry' skill.id %}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                </span>
+                                {% endfor %}
+                                <a class="btn btn-primary" href="{% url 'create_skill_entry' %}">Add new skill</a>
                             </div>
+                            </ul>
                         </div>
                     </div>
                 </div>

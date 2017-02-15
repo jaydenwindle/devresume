@@ -1,6 +1,11 @@
 from django import forms
 
-from .models import WorkEntry, EducationEntry, ProjectEntry, ApplicationEntry
+from .models import User, WorkEntry, EducationEntry, ProjectEntry, ApplicationEntry
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User 
+        fields = ['bio', 'location', 'birth_date', 'phone', 'website']
 
 class WorkEntryForm(forms.ModelForm):
     class Meta:

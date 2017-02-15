@@ -12,23 +12,6 @@ class User(AbstractUser):
     phone = models.CharField(validators=[phoneRegex], blank=True, max_length=15) # validators should be a list
     website = models.URLField(blank=True);
 
-class SocialProfile(models.Model):
-    TWITTER = 'TW'
-    GITHUB = 'GH'
-    LINKEDIN = 'LI'
-
-    SOCIAL_NETWORK_CHOICES = (
-        (TWITTER, 'Twitter'),
-        (GITHUB, 'Github'),
-        (LINKEDIN, 'LinkedIn'),
-    )
-
-    user = models.ForeignKey(User, related_name="profiles")
-    network = models.CharField(choices=SOCIAL_NETWORK_CHOICES, default=GITHUB, max_length=50);
-    username = models.CharField(max_length=50);
-    url = models.URLField(max_length=200);
-    oauthToken = models.CharField(max_length=200);
-
 class SkillEntry(models.Model):
     user = models.ForeignKey(User, related_name="skills")
     name = models.CharField(max_length=50); 

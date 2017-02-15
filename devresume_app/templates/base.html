@@ -30,18 +30,11 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <div class="navbar-right">
                     {% if user.is_authenticated %}
-                        <!--<ul class="nav navbar-nav">-->
-                            <!--<li><a href="{% url 'dashboard' %}">Dashboard</a></li>-->
-                        <!--</ul>-->
-                        {% if user.first_name %}
-                            <p class="navbar-text">Logged in as {{ user.first_name }}</p>
-                        {% else %}
-                            <p class="navbar-text">Signed in as {{ user.username }}</p>
-                        {% endif %}
+                        <p class="navbar-text">Signed in as {{ user.username }}</p>
                         <a class="btn btn-default" href="{% url 'logout' %}">Logout</a>
                     {% else %}
                         <p class="navbar-text">Not signed in.</p>
-                        <a class="btn btn-default" href="{% url 'login' %}">Login</a>
+                        <a class="btn btn-default" href="{% url 'social:begin' 'github' %}">Login with Github</a>
                     {% endif %}
                 </div>
             </div><!--/.nav-collapse -->
