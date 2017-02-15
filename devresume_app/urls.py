@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
-from views import WorkEntryUpdate, WorkEntryCreate, WorkEntryDelete, EducationEntryUpdate, EducationEntryCreate, EducationEntryDelete,SocialProfileUpdate, SocialProfileCreate, SocialProfileDelete,SkillEntryUpdate, SkillEntryCreate, SkillEntryDelete, ProjectEntryCreate, ProjectEntryUpdate, ProjectEntryDelete, ApplicationEntryCreate, ApplicationEntryUpdate, ApplicationEntryDelete
+from views import UserInfoUpdate, WorkEntryUpdate, WorkEntryCreate, WorkEntryDelete, EducationEntryUpdate, EducationEntryCreate, EducationEntryDelete, SkillEntryUpdate, SkillEntryCreate, SkillEntryDelete, ProjectEntryCreate, ProjectEntryUpdate, ProjectEntryDelete, ApplicationEntryCreate, ApplicationEntryUpdate, ApplicationEntryDelete
 
 
 admin.autodiscover()
@@ -12,15 +12,13 @@ urlpatterns = [
     url(r'^$', views.index, name='dashboard'),
     # url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
+    url(r'^profile/(?P<pk>[\w-]+)/edit/$', UserInfoUpdate.as_view(), name='edit_user_profile'),
     url(r'^work_entry/create/$', WorkEntryCreate.as_view(), name='create_work_entry'),
     url(r'^work_entry/(?P<pk>[\w-]+)/update/$', WorkEntryUpdate.as_view(), name='update_work_entry'),
     url(r'^work_entry/(?P<pk>[\w-]+)/delete/$', WorkEntryDelete.as_view(), name='delete_work_entry'),
     url(r'^education_entry/create/$', EducationEntryCreate.as_view(), name='create_education_entry'),
     url(r'^education_entry/(?P<pk>[\w-]+)/update/$', EducationEntryUpdate.as_view(), name='update_education_entry'),
     url(r'^education_entry/(?P<pk>[\w-]+)/delete/$', EducationEntryDelete.as_view(), name='delete_education_entry'),
-    url(r'^create_social_profile/$', SocialProfileCreate.as_view(), name='create_social_profile'),
-    url(r'^update_social_profile/(?P<pk>[\w-]+)$', SocialProfileUpdate.as_view(), name='update_social_profile'),
-    url(r'^delete_social_profile/(?P<pk>[\w-]+)$', SocialProfileDelete.as_view(), name='delete_social_profile'),
     url(r'^create_skill_entry/$', SkillEntryCreate.as_view(), name='create_skill_entry'),
     url(r'^update_skill_entry/(?P<pk>[\w-]+)$', SkillEntryUpdate.as_view(), name='update_skill_entry'),
     url(r'^delete_skill_entry/(?P<pk>[\w-]+)$', SkillEntryDelete.as_view(), name='delete_skill_entry'),

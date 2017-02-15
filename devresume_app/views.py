@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import UpdateView, CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from forms import WorkEntryForm, EducationEntryForm, ProjectEntryForm, ApplicationEntryForm
-from models import WorkEntry, EducationEntry,SocialProfile, SkillEntry, ProjectEntry, ApplicationEntry, User
+from forms import UserForm, WorkEntryForm, EducationEntryForm, ProjectEntryForm, ApplicationEntryForm
+from models import WorkEntry, EducationEntry, SkillEntry, ProjectEntry, ApplicationEntry, User
 from collections import Counter
 import math
 import collections
@@ -18,7 +18,6 @@ def index(request):
             'user': request.user,
             'work_entries': request.user.work.all(),
             'education_entries': request.user.education.all(),
-            'social_profiles': request.user.profiles.all(),
             'project_entries': request.user.projects.all(),
             'skill_entries': request.user.skills.all(),
             'application_entries': request.user.applications.all(),
@@ -80,6 +79,12 @@ def ghImport(request):
     username = request.user.profiles.filter(network="GH").all()[0].username
     return HttpResponse(githubProfile(username))
 
+class UserInfoUpdate(LoginRequiredMixin, UpdateView):
+    login_url = '/login'
+    model = User
+    form_class = UserForm
+    template_name = 'generic_form.html'
+    success_url = '/app/'
 
 class WorkEntryCreate(LoginRequiredMixin, CreateView):
     model = WorkEntry
@@ -132,33 +137,6 @@ class EducationEntryDelete(LoginRequiredMixin, DeleteView):
     def get_object(self, queryset=None):
         """ Hook to ensure object is owned by request.user. """
         obj = super(EducationEntryDelete, self).get_object()
-        if not obj.user == self.request.user:
-            raise Http404
-        return obj
-
-class SocialProfileCreate(LoginRequiredMixin, CreateView):
-    model = SocialProfile
-    fields = ['network','username','url']
-    template_name = 'generic_form.html'
-    success_url = '/app/'
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(SocialProfileCreate, self).form_valid(form)
-
-class SocialProfileUpdate(LoginRequiredMixin, UpdateView):
-    model = SocialProfile
-    fields = ['network','username','url']
-    template_name = 'generic_form.html'
-    success_url = '/app/'
-
-class SocialProfileDelete(LoginRequiredMixin, DeleteView):
-    model = SocialProfile
-    template_name = 'generic_delete_form.html'
-    success_url = '/app/'
-    def get_object(self, queryset=None):
-        """ Hook to ensure object is owned by request.user. """
-        obj = super(SocialProfileDelete, self).get_object()
         if not obj.user == self.request.user:
             raise Http404
         return obj
