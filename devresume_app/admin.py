@@ -25,7 +25,6 @@ class UserAdmin(admin.ModelAdmin):
     inlines = [
         WorkEntryInline,
         EducationEntryInline,
-        SkillEntryInline,
     ]
 
 admin.site.unregister(User)

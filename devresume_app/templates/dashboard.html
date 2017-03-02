@@ -1,37 +1,5 @@
 {% extends "base.html" %} {% load staticfiles %} {% block content %}
 
-<script>
-    $(document).ready(function() { $('#nav-tabs a[role="tab"]').click(function(e) { e.preventDefault(); console.log("hello");
-            $(this).tab('show');
-        })
-
-        if(window.innerWidth >= 768) {
-            $('#profile .row').each(function() {
-                var row_max = 0;
-                console.log($(this).find('.panel-default'))
-                $(this).find('.panel-default').each(function() {
-                    if($(this).height() > row_max) {
-                        row_max = $(this).height();
-                    }
-                });
-                $(this).find('.panel-default').height(row_max);
-                row_max = 0;
-            });
-        }
-
-    })
-</script>
-
-<div class="jumbotron text-center">
-    <div class="container">
-        <!--<a href="/" class="lang-logo">-->
-        <!--<img src="{% static 'lang-logo.png'%}">-->
-        <!--</a>-->
-        <h1>Dashboard</h1>
-        <br /><br />
-    </div>
-</div>
-
 <div class="row">
     <div class="col-md-4">
         <a href="{% url 'resume_info' %}" class="btn btn-primary btn-block btn-massive">
@@ -41,14 +9,14 @@
         </a>
     </div>
     <div class="col-md-4">
-        <a class="btn btn-primary btn-block btn-massive">
+        <a href="{% url 'list_applications' %}" class="btn btn-primary btn-block btn-massive">
             <i class="fa fa-send"></i>
             <p>Applications</p>
             <small>(Manage your generated resumes)</small>
         </a>
     </div>
     <div class="col-md-4">
-        <a class="btn btn-primary btn-block btn-massive">
+        <a href="{% url 'edit_user_profile' id %}" class="btn btn-primary btn-block btn-massive">
             <i class="fa fa-user-circle-o"></i>
             <p>Profile</p>
             <small>(Change your profile settings)</small>

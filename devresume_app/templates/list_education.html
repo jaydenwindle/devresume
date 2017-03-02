@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% load staticfiles %} {% block content %}
+
+<div class="row">
+    <div class="col-xs-12">
+
+        <div class="panel panel-default">
+            {% if education %}
+                 <table class="table">
+                     <tr>
+                         <th>Institution</th>
+                         <th>Dates</th>
+                         <th>Major</th>
+                     </tr>
+                     {% for ed in education %}
+                     <tr>
+
+                         <td>{{ed.institution}}</td>
+                         <td>{{ed.startDate}} - {{ed.endDate}}</td>
+                         <td>{{ed.area}}</td>
+                         <td>
+                             <a class="text-primary" href="{% url 'update_education_entry' ed.id %}">Edit</a>
+                             <a class="text-danger" href="{% url 'delete_education_entry' ed.id %}">Delete</a>
+                         </td>
+                     </tr>
+                     {% endfor %}
+                </table>
+            {% else %}
+                <div class="panel-body">
+                    <p class="text-center">
+                        No education history yet. Add an entry to get started!</p>
+                    </p>
+                </div>
+            {% endif %}
+        </div>
+        <div class="row text-center">
+            <a class="text-center btn btn-primary" href="{% url 'create_education_entry' %}"><i class="fa fa-plus"></i> Add an Education Entry</a>
+        </div>
+    
+    </div>
+</div>
+
+{% endblock %}

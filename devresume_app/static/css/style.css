@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
 
+
+
 body {
     background-color: #002b36;
 }
@@ -10,7 +12,7 @@ body {
 
 /* Extra small devices (phones, less than 768px) */
 
-h1, h2, h3, h4, h5, h6, p, a, li {
+h1, h2, h3, h4, h5, h6, p, a, li, label {
     font-family: "Roboto Mono";
     color: #93a1a1;
 }
@@ -49,6 +51,23 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     color: #eee8d5;
 }
 
+.text-primary {
+    color: #268bd2;
+}
+
+.text-warning {
+    color: #cb4b16;
+}
+
+.text-danger {
+    color: #dc322f;
+}
+
+.datepicker table tr td.active.active,
+.datepicker table tr td.active:hover.active {
+    background-color: #6c71c4;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 786px) {
 
@@ -73,10 +92,13 @@ h1, h2, h3, h4, h5, h6, p, a, li {
 nav {
     background-color: transparent;
     font-family: "Roboto Mono";
+    padding-top: 15px;
 }
 
 nav .navbar-brand {
     margin-left: 0px !important;
+    font-size: 25px;
+    line-height: 20px;
 }
 
 nav .navbar-toggle {
@@ -94,6 +116,8 @@ nav a, nav p {
 
 nav .navbar-text {
     margin-right: 0;
+    line-height: 20px;
+    font-size: 16px;
 }
 
 nav a:hover {
@@ -126,9 +150,23 @@ nav a:hover {
     color: #93a1a1;
 }
 
+.big-icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+}
+
 .tab-pane {
     background-color: #93a1a1;
     padding: 15px;
+}
+
+.panel {
+    background-color: transparent;
+}
+
+.panel .table {
+    color: #93a1a1;
+    font-family: "Roboto Mono", monospace;
 }
 
 /* Small devices (tablets, 768px and up) */

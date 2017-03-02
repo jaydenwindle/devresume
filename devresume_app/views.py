@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.views.generic import UpdateView, CreateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from forms import UserForm, WorkEntryForm, EducationEntryForm, ProjectEntryForm, ApplicationEntryForm
-from models import WorkEntry, EducationEntry, SkillEntry, ProjectEntry, ApplicationEntry, User
+from django.views.generic import ListView, UpdateView, CreateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin 
+from forms import *
+from models import *
 from collections import Counter
 import math
 import collections
@@ -14,96 +14,61 @@ import json
 # Create your views here.
 def index(request):
     if request.user.is_authenticated():
-        return render(request, 'dashboard.html');
+        return render(request, 'dashboard.html', { "title": "Dashboard", "id": request.user.id });
     else:
         return redirect('landingpage')
 
 def resume_info(request):
-    return render(request, 'resume_info.html');
+    return render(request, 'resume_info.html', {"title": "Resume Info"});
 
-def resume(request, pk):
+class ListWorkHistory(ListView):
+    model = WorkEntry
+    template_name = 'list_work_history.html'
+    context_object_name="work_history"
 
-    def array_similarity(c1, c2):
-        terms = set(c1).union(c2)
-        dotprod = sum(c1.get(k, 0) * c2.get(k, 0) for k in terms)
-        magA = math.sqrt(sum(c1.get(k, 0)**2 for k in terms))
-        magB = math.sqrt(sum(c2.get(k, 0)**2 for k in terms))
-        return dotprod / (magA * magB)
+    def get_queryset(self):
+        return self.request.user.work_history.all
 
+    def get_context_data(self, **kwargs):
+        context = super(ListWorkHistory, self).get_context_data(**kwargs)
+        context['title'] = 'Work History'
+        return context
 
-    if request.user.is_authenticated():
-        renderDict = {
-            'user': request.user,
-            'education_entries': request.user.education.all(),
-        }
-        app = Counter(ApplicationEntry.objects.get(pk=pk).desired_skills.all())
-
-        # match jobs
-        job_history = WorkEntry.objects.filter(user=request.user).all()
-        sorted_jobs = {}
-        for item in job_history:
-            counter = Counter(item.skills.all())
-            sorted_jobs[array_similarity(app,counter)] = item
-
-        for i in range(3):
-            renderDict['job' + str(i)] = sorted_jobs[max(sorted_jobs)]
-            del sorted_jobs[max(sorted_jobs.keys())]
-            renderDict['job' + str(i) + "skills"] = renderDict['job' + str(i)].skills.all()
-            if len(sorted_jobs) == 0:
-                break;
-
-        # match projects
-        job_history = ProjectEntry.objects.filter(user=request.user).all()
-        sorted_projects = {}
-        for item in job_history:
-            counter = Counter(item.skills.all())
-            sorted_projects[array_similarity(app,counter)] = item
-
-
-        for i in range(3):
-            renderDict['project' + str(i)] = sorted_projects[max(sorted_projects)]
-            del sorted_projects[max(sorted_projects.keys())]
-            renderDict['project' + str(i) + "skills"] = renderDict['job' + str(i)].skills.all()
-            if len(sorted_projects) == 0:
-                break;
-
-        return render(request, 'resume.html', renderDict)
-    else:
-        return redirect('login')
-
-
-def ghImport(request):
-    username = request.user.profiles.filter(network="GH").all()[0].username
-    return HttpResponse(githubProfile(username))
-
-class UserInfoUpdate(LoginRequiredMixin, UpdateView):
-    login_url = '/login'
-    model = User
-    form_class = UserForm
-    template_name = 'generic_form.html'
-    success_url = '/app/'
-
-class WorkEntryCreate(LoginRequiredMixin, CreateView):
+class AddWorkHistory(LoginRequiredMixin, CreateView):
     model = WorkEntry
     form_class = WorkEntryForm
     template_name = 'generic_form.html'
-    success_url = '/app/'
+    success_url = '/app/work_history/'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super(WorkEntryCreate, self).form_valid(form)
+        return super(AddWorkHistory, self).form_valid(form)
 
-class WorkEntryUpdate(LoginRequiredMixin, UpdateView):
-    login_url = '/login'
+    def get_context_data(self, **kwargs):
+        context = super(AddWorkHistory, self).get_context_data(**kwargs)
+        context['title'] = 'Add Work History'
+        return context
+
+class EditWorkHistory(LoginRequiredMixin, UpdateView):
     model = WorkEntry
     form_class = WorkEntryForm
     template_name = 'generic_form.html'
-    success_url = '/app/'
+    success_url = '/app/work_history/'
 
-class WorkEntryDelete(LoginRequiredMixin, DeleteView):
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(EditWorkHistory, self).form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(EditWorkHistory, self).get_context_data(**kwargs)
+        context['title'] = 'Edit Work History'
+        return context
+
+class DeleteWorkHistory(LoginRequiredMixin, DeleteView):
     model = WorkEntry
     template_name = 'generic_delete_form.html'
-    success_url = '/app/'
+    success_url = '/app/work_history'
+
     def get_object(self, queryset=None):
         """ Hook to ensure object is owned by request.user. """
         obj = super(WorkEntryDelete, self).get_object()
@@ -111,15 +76,44 @@ class WorkEntryDelete(LoginRequiredMixin, DeleteView):
             raise Http404
         return obj
 
+class UserInfoUpdate(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = UserForm
+    template_name = 'generic_form.html'
+    success_url = '/app/'
+
+    def get_context_data(self, **kwargs):
+        context = super(UserInfoUpdate, self).get_context_data(**kwargs)
+        context['title'] = 'Edit Profile'
+        return context
+
+class ListEducation(ListView):
+    model = EducationEntry
+    template_name = 'list_education.html'
+    context_object_name="education"
+
+    def get_queryset(self):
+        return self.request.user.education.all
+
+    def get_context_data(self, **kwargs):
+        context = super(ListEducation, self).get_context_data(**kwargs)
+        context['title'] = 'Education'
+        return context
+
 class EducationEntryCreate(LoginRequiredMixin, CreateView):
     model = EducationEntry
     form_class = EducationEntryForm
     template_name = 'generic_form.html'
-    success_url = '/app/'
+    success_url = '/app/education'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(EducationEntryCreate, self).form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(EducationEntryCreate, self).get_context_data(**kwargs)
+        context['title'] = 'Add an Education Entry'
+        return context
 
 class EducationEntryUpdate(LoginRequiredMixin, UpdateView):
     model = EducationEntry
@@ -140,13 +134,18 @@ class EducationEntryDelete(LoginRequiredMixin, DeleteView):
 
 class SkillEntryCreate(LoginRequiredMixin, CreateView):
     model = SkillEntry
-    fields = ['name']
+    form_class = SkillEntryForm
     template_name = 'generic_form.html'
     success_url = '/app/'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(SkillEntryCreate, self).form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(SkillEntryCreate, self).get_context_data(**kwargs)
+        context['title'] = 'Add a new Skill'
+        return context
 
 class SkillEntryUpdate(LoginRequiredMixin, UpdateView):
     model = SkillEntry
@@ -164,6 +163,20 @@ class SkillEntryDelete(LoginRequiredMixin, DeleteView):
         if not obj.user == self.request.user:
             raise Http404
         return obj
+
+class ListProjects(ListView):
+    model = ProjectEntry
+    template_name = 'list_projects.html'
+    context_object_name="projects"
+
+    def get_queryset(self):
+        return self.request.user.projects.all
+
+    def get_context_data(self, **kwargs):
+        context = super(ListProjects, self).get_context_data(**kwargs)
+        context['title'] = 'Projects'
+        return context
+
 
 class ProjectEntryCreate(LoginRequiredMixin, CreateView):
     model = ProjectEntry
@@ -192,15 +205,33 @@ class ProjectEntryDelete(LoginRequiredMixin, DeleteView):
             raise Http404
         return obj
 
+class ListApplications(ListView):
+    model = ApplicationEntry
+    template_name = 'list_applications.html'
+    context_object_name="applications"
+
+    def get_queryset(self):
+        return self.request.user.applications.all
+
+    def get_context_data(self, **kwargs):
+        context = super(ListApplications, self).get_context_data(**kwargs)
+        context['title'] = 'Applications'
+        return context
+
 class ApplicationEntryCreate(LoginRequiredMixin, CreateView):
     model = ApplicationEntry
     form_class = ApplicationEntryForm
     template_name = 'generic_form.html'
-    success_url = '/app/'
+    success_url = '/app/applications'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(ApplicationEntryCreate, self).form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(ApplicationEntryCreate, self).get_context_data(**kwargs)
+        context['title'] = 'Add an Application'
+        return context
 
 class ApplicationEntryUpdate(LoginRequiredMixin, UpdateView):
     model = ApplicationEntry
@@ -274,3 +305,59 @@ def githubProfile(userName):
     # print("The total repo from " + userDict['name'] + " is ")
     # print(totalList[0])
     return [profileBasic, totalList]
+
+def resume(request, pk):
+
+    def array_similarity(c1, c2):
+        terms = set(c1).union(c2)
+        dotprod = sum(c1.get(k, 0) * c2.get(k, 0) for k in terms)
+        magA = math.sqrt(sum(c1.get(k, 0)**2 for k in terms))
+        magB = math.sqrt(sum(c2.get(k, 0)**2 for k in terms))
+        return dotprod / (magA * magB)
+
+
+    if request.user.is_authenticated():
+        renderDict = {
+            'user': request.user,
+            'education_entries': request.user.education.all(),
+        }
+        app = Counter(ApplicationEntry.objects.get(pk=pk).desired_skills.all())
+
+        # match jobs
+        job_history = WorkEntry.objects.filter(user=request.user).all()
+        sorted_jobs = {}
+        for item in job_history:
+            counter = Counter(item.skills.all())
+            sorted_jobs[array_similarity(app,counter)] = item
+
+        for i in range(3):
+            renderDict['job' + str(i)] = sorted_jobs[max(sorted_jobs)]
+            del sorted_jobs[max(sorted_jobs.keys())]
+            renderDict['job' + str(i) + "skills"] = renderDict['job' + str(i)].skills.all()
+            if len(sorted_jobs) == 0:
+                break;
+
+        # match projects
+        job_history = ProjectEntry.objects.filter(user=request.user).all()
+        sorted_projects = {}
+        for item in job_history:
+            counter = Counter(item.skills.all())
+            sorted_projects[array_similarity(app,counter)] = item
+
+
+        for i in range(3):
+            renderDict['project' + str(i)] = sorted_projects[max(sorted_projects)]
+            del sorted_projects[max(sorted_projects.keys())]
+            renderDict['project' + str(i) + "skills"] = renderDict['job' + str(i)].skills.all()
+            if len(sorted_projects) == 0:
+                break;
+
+        return render(request, 'resume.html', renderDict)
+    else:
+        return redirect('login')
+
+
+def ghImport(request):
+    username = request.user.profiles.filter(network="GH").all()[0].username
+    return HttpResponse(githubProfile(username))
+

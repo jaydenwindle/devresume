@@ -5,9 +5,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-push-2">
-            <form class="form-horizontal" method="post">{% csrf_token %}
+            <form class="" method="post">{% csrf_token %}
                 <fieldset>
-                    <legend>{{ title  }}</legend>
                     {% for field in form %}
                         {% if field.errors %}
                         <div class="form-group error">
@@ -26,6 +25,9 @@
                                 <p><small class="form-text text-muted">{{ field.help_text  }}</small></p>
                                 {% endif %}
                             </div>
+                            {% if field.name == "skills" or field.name == "desired_skills" %}
+                            <label>(Don't see the skill you want? Add a new skill <a href="{% url 'create_skill_entry' %}" class="text-primary">Here</a>)</label> 
+                            {% endif %}
                         </div>
                         {% endif %}
                     {% endfor %}
@@ -34,8 +36,8 @@
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary" >Submit</button>
                 </div>
+                <br /><br />
             </form>
-        
         </div>
     </div>
 </div>

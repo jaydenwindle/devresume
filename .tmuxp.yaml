@@ -1,0 +1,13 @@
+session_name: devresume 
+windows:
+    - window_name: dev window
+      layout: main-vertical
+      shell_command_before:
+        - source venv/bin/activate
+      options:
+        main-pane-width: 140
+      panes:
+        - vim
+        - python manage.py runserver
+        - clear
+

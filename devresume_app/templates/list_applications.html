@@ -1,0 +1,45 @@
+{% extends "base.html" %} {% load staticfiles %} {% block content %}
+
+<div class="row">
+    <div class="col-xs-12">
+
+        <div class="panel panel-default">
+            {% if applications %}
+                 <table class="table">
+                     <tr>
+                         <th>Job</th>
+                         <th>Desired Skills</th>
+                         <th>Actions</th>
+                     </tr>
+                     {% for app in applications %}
+                     <tr>
+                         <td>{{app.company_name}} - {{app.position}}</td>
+                         <td>
+                             {% for skill in app.desired_skills.all %}
+                                {{skill}}
+                             {% endfor %}
+                         </td>
+                         <td>
+                             <a class="text-success" href="{% url 'view_application_resume' app.id %}">View Resume</a>
+                             <a class="text-primary" href="{% url 'edit_application_entry' app.id %}">Edit</a>
+                             <a class="text-danger" href="{% url 'delete_application_entry' app.id %}">Delete</a>
+                         </td>
+                     </tr>
+                     {% endfor %}
+                </table>
+            {% else %}
+                <div class="panel-body">
+                    <p class="text-center">
+                        No applications yet. Add an application to get started!</p>
+                    </p>
+                </div>
+            {% endif %}
+        </div>
+        <div class="row text-center">
+            <a class="text-center btn btn-primary" href="{% url 'create_application_entry' %}"><i class="fa fa-plus"></i> Add an Application</a>
+        </div>
+    
+    </div>
+</div>
+
+{% endblock %}

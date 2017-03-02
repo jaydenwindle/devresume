@@ -13,13 +13,14 @@ class User(AbstractUser):
     website = models.URLField(blank=True);
 
 class SkillEntry(models.Model):
-    user = models.ForeignKey(User, related_name="skills")
+    users = models.ManyToManyField(User)
     name = models.CharField(max_length=50); 
+    domain = models.CharField(max_length=50); 
     def __unicode__(self):
         return self.name
 
 class WorkEntry(models.Model):
-    user = models.ForeignKey(User, related_name="work")
+    user = models.ForeignKey(User, related_name="work_history")
     company = models.CharField(max_length=200);
     position = models.CharField(max_length=200);
     website = models.URLField(blank=True);
@@ -31,12 +32,10 @@ class WorkEntry(models.Model):
 class EducationEntry(models.Model):
     user = models.ForeignKey(User, related_name="education")
     institution = models.CharField(max_length=200); 
-    area = models.CharField(max_length=200); 
-    studyType = models.CharField(max_length=200); 
+    area = models.CharField(max_length=200, verbose_name="Area of Study"); 
     skills = models.ManyToManyField(SkillEntry)
-    startDate = models.DateField(); 
-    endDate = models.DateField(); 
-    gpa = models.DecimalField(max_digits=4, decimal_places=2)
+    startDate = models.DateField(verbose_name="Start Date"); 
+    endDate = models.DateField(verbose_name="End Date"); 
 
 class ProjectEntry(models.Model):
     user = models.ForeignKey(User, related_name="projects")
@@ -49,5 +48,8 @@ class ProjectEntry(models.Model):
 
 class ApplicationEntry(models.Model):
     user = models.ForeignKey(User, related_name="applications")
-    company_name = models.CharField(max_length=200);
+    company_name = models.CharField(max_length=200)
+    position = models.CharField(max_length=200)
     desired_skills = models.ManyToManyField(SkillEntry, blank=True)
+    projects = models.ManyToManyField(ProjectEntry, blank=True)
+    jobs = models.ManyToManyField(WorkEntry, blank=True)

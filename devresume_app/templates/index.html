@@ -3,8 +3,8 @@
 <div>
     <div class="jumbotron text-center landing">
         <div class="container">
-            <h1>Welcome to DevResume!</h1>
-            <p>The perfect resume for every situation</p>
+            <h1>Developer Resumes Are Different.</h1>
+            <p>DevResume helps developers build the perfect resume for every job application.</p>
             <br />
             <a type="button" class="btn btn-lg btn-primary" href="{% url 'social:begin' 'github' %}"></span> Login with <i class="fa fa-github"></i></a>
         </div>
@@ -12,17 +12,26 @@
 
     <div class="container" id="about-us">
 
-        <h2 class="text-center">The Inspiration</h2>
-        <p class="summary">
-            As young developers in co-op, we generally submit our resume to a LOT of different companies. As everyone knows, it's important to optimize your resume for the position you are applying to. But how do we do that? By hand, using Word or Google Docs (or maybe LATEX if you're a keener). When you're trying to send out 20 or more applications to different companies, that's a lot of work! As chronically lazy developers, we decided to automate the process.</p>
-
-
-        <h2 class="text-center">What We Do</h2>
-        <p class="summary">
-            We have created a tool that automatically optimizes your resume for each job you apply to. You input your resume info (job history, skills, education, github info), and tag each of your previous jobs and github projects with the set of skills that you
-            learned in that role. Then, just input the skills that the company you are applying to is looking for, and ResOptim does the rest! It even hosts your resume for you, so you have a convinient link to send to future employers.
-        </p>
-        <br />
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <i class="fa fa-line-chart big-icon text-primary"></i>
+                <h4>Automatic Optimization</h4>
+                <br />
+                <p>Automatically optimize your resume for each job application. Just tell us which skills you want to highlight, and we'll generate a resume that shows off your prowess.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <i class="fa fa-github-square big-icon text-primary"></i>
+                <h4>Show Off Your Projects</h4>
+                <br />
+                <p>Side projects and open-source contributions are great ways to show off your skills. We'll put them front and center on your resume for future employers to see.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <i class="fa fa-css3 big-icon text-primary"></i>
+                <h4>Style with CSS</h4>
+                <br />
+                <p>Choose from one of our premade themes or create your own with CSS. Then export to PDF or email a live link to employers.</p>
+            </div>
+        </div>
     </div>
 
     <br /><br />

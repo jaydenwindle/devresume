@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
-from views import UserInfoUpdate, WorkEntryUpdate, WorkEntryCreate, WorkEntryDelete, EducationEntryUpdate, EducationEntryCreate, EducationEntryDelete, SkillEntryUpdate, SkillEntryCreate, SkillEntryDelete, ProjectEntryCreate, ProjectEntryUpdate, ProjectEntryDelete, ApplicationEntryCreate, ApplicationEntryUpdate, ApplicationEntryDelete
+from views import *
 
 
 admin.autodiscover()
@@ -14,20 +14,24 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
     url(r'^resume_info/$', views.resume_info, name='resume_info'),
     url(r'^profile/(?P<pk>[\w-]+)/edit/$', UserInfoUpdate.as_view(), name='edit_user_profile'),
-    url(r'^work_entry/create/$', WorkEntryCreate.as_view(), name='create_work_entry'),
-    url(r'^work_entry/(?P<pk>[\w-]+)/update/$', WorkEntryUpdate.as_view(), name='update_work_entry'),
-    url(r'^work_entry/(?P<pk>[\w-]+)/delete/$', WorkEntryDelete.as_view(), name='delete_work_entry'),
-    url(r'^education_entry/create/$', EducationEntryCreate.as_view(), name='create_education_entry'),
-    url(r'^education_entry/(?P<pk>[\w-]+)/update/$', EducationEntryUpdate.as_view(), name='update_education_entry'),
-    url(r'^education_entry/(?P<pk>[\w-]+)/delete/$', EducationEntryDelete.as_view(), name='delete_education_entry'),
-    url(r'^skill/create/$', SkillEntryCreate.as_view(), name='create_skill_entry'),
-    url(r'^skill/(?P<pk>[\w-]+)/update$', SkillEntryUpdate.as_view(), name='update_skill_entry'),
+    url(r'^work_history/$', ListWorkHistory.as_view(), name='list_work_history'),
+    url(r'^work_history/add/$', AddWorkHistory.as_view(), name='add_work_history'),
+    url(r'^work_history/(?P<pk>[\w-]+)/edit/$', EditWorkHistory.as_view(), name='edit_work_history'),
+    url(r'^work_history/(?P<pk>[\w-]+)/delete/$', DeleteWorkHistory.as_view(), name='delete_work_history'),
+    url(r'^education/$', ListEducation.as_view(), name='list_education'),
+    url(r'^education/add/$', EducationEntryCreate.as_view(), name='create_education_entry'),
+    url(r'^education/(?P<pk>[\w-]+)/edit/$', EducationEntryUpdate.as_view(), name='update_education_entry'),
+    url(r'^education/(?P<pk>[\w-]+)/delete/$', EducationEntryDelete.as_view(), name='delete_education_entry'),
+    url(r'^skill/add/$', SkillEntryCreate.as_view(), name='create_skill_entry'),
+    url(r'^skill/(?P<pk>[\w-]+)/edit$', SkillEntryUpdate.as_view(), name='update_skill_entry'),
     url(r'^skill/(?P<pk>[\w-]+)/delete$', SkillEntryDelete.as_view(), name='delete_skill_entry'),
-    url(r'^project/create/$', ProjectEntryCreate.as_view(), name='create_project_entry'),
-    url(r'^project/(?P<pk>[\w-]+)/update/$', ProjectEntryUpdate.as_view(), name='update_project_entry'),
-    url(r'^project/(?P<pk>[\w-]+)/delete/$', ProjectEntryDelete.as_view(), name='delete_project_entry'),
+    url(r'^projects/$', ListProjects.as_view(), name='list_projects'),
+    url(r'^projects/add/$', ProjectEntryCreate.as_view(), name='create_project_entry'),
+    url(r'^projects/(?P<pk>[\w-]+)/edit/$', ProjectEntryUpdate.as_view(), name='edit_project_entry'),
+    url(r'^projects/(?P<pk>[\w-]+)/delete/$', ProjectEntryDelete.as_view(), name='delete_project_entry'),
+    url(r'^application/$', ListApplications.as_view(), name='list_applications'),
     url(r'^application/create/$', ApplicationEntryCreate.as_view(), name='create_application_entry'),
-    url(r'^application/(?P<pk>[\w-]+)/update/$', ApplicationEntryUpdate.as_view(), name='update_application_entry'),
+    url(r'^application/(?P<pk>[\w-]+)/edit/$', ApplicationEntryUpdate.as_view(), name='edit_application_entry'),
     url(r'^application/(?P<pk>[\w-]+)/delete/$', ApplicationEntryDelete.as_view(), name='delete_application_entry'),
     url(r'^application/(?P<pk>[\w-]+)/view_resume/$', views.resume, name='view_application_resume'),
 ]

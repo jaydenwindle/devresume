@@ -1,55 +1,26 @@
 {% extends "base.html" %} {% load staticfiles %} {% block content %}
 
-<script>
-    $(document).ready(function() { $('#nav-tabs a[role="tab"]').click(function(e) { e.preventDefault(); console.log("hello");
-            $(this).tab('show');
-        })
-
-        if(window.innerWidth >= 768) {
-            $('#profile .row').each(function() {
-                var row_max = 0;
-                console.log($(this).find('.panel-default'))
-                $(this).find('.panel-default').each(function() {
-                    if($(this).height() > row_max) {
-                        row_max = $(this).height();
-                    }
-                });
-                $(this).find('.panel-default').height(row_max);
-                row_max = 0;
-            });
-        }
-
-    })
-</script>
-
-<div class="jumbotron text-center">
-    <div class="container">
-        <h1>Resume Info</h1>
-        <br /><br />
-    </div>
-</div>
-
 <div class="row">
     <div class="col-md-4">
-        <a href="" class="btn btn-primary btn-block btn-massive">
+        <a href="{% url 'list_work_history' %}" class="btn btn-primary btn-block btn-massive">
             <i class="fa fa-history"></i>
             <p>Work History</p>
         </a>
     </div>
     <div class="col-md-4">
-        <a class="btn btn-primary btn-block btn-massive">
+        <a href="{% url 'list_projects' %}" class="btn btn-primary btn-block btn-massive">
             <i class="fa fa-cubes"></i>
             <p>Projects</p>
         </a>
     </div>
+    <!--<div class="col-md-6">-->
+        <!--<a class="btn btn-primary btn-block btn-massive">-->
+            <!--<i class="fa fa-tasks"></i>-->
+            <!--<p>Skills</p>-->
+        <!--</a>-->
+    <!--</div>-->
     <div class="col-md-4">
-        <a class="btn btn-primary btn-block btn-massive">
-            <i class="fa fa-tasks"></i>
-            <p>Skills</p>
-        </a>
-    </div>
-    <div class="col-md-4 col-md-push-4">
-        <a class="btn btn-primary btn-block btn-massive">
+        <a href="{% url 'list_education' %}" class="btn btn-primary btn-block btn-massive">
             <i class="fa fa-graduation-cap"></i>
             <p>Education</p>
         </a>

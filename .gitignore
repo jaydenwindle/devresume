@@ -18,3 +18,5 @@ build/
 tests/report/
 venv/
 db.sqlite3
+.tmuxp.yaml
+.DS_Store
