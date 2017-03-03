@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import AbstractUser
+import requests
 
 class User(AbstractUser):
     bio = models.TextField(max_length=500, blank=True)
@@ -11,6 +12,13 @@ class User(AbstractUser):
                                           Up to 15 digits allowed.")
     phone = models.CharField(validators=[phoneRegex], blank=True, max_length=15) # validators should be a list
     website = models.URLField(blank=True);
+
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            r = requests.get('https://api.github.com/users/' + self.username + '/repos')
+            print r.text
+            super(User, self).save(*args, **kwargs)
+
 
 class SkillEntry(models.Model):
     users = models.ManyToManyField(User)

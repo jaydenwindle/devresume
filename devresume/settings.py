@@ -146,5 +146,5 @@ AUTHENTICATION_BACKENDS = (
 SOCIAL_AUTH_GITHUB_KEY = '1af179b64a9f4030deeb'
 SOCIAL_AUTH_GITHUB_SECRET = '0ed01ea192e13ad4818cfdbe90a1ac1fc1220507'
 
-# Custom login redirect
+LOGIN_URL = '/oauth/login/github'
 LOGIN_REDIRECT_URL = 'dashboard'
