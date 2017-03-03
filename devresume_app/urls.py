@@ -14,13 +14,13 @@ urlpatterns = [
     url(r'^resume_info/$', resume_info, name='resume_info'),
 
     # User views
-    url(r'^profile/(?P<pk>[\w-]+)/edit/$', UserViews.UserInfoUpdate.as_view(), name='edit_user_profile'),
+    url(r'^profile/(?P<pk>[\w-]+)/edit/$', UserInfoUpdate.as_view(), name='edit_user_profile'),
 
     # Work views
-    url(r'^work_history/$', WorkViews.ListWorkHistory.as_view(), name='list_work_history'),
-    url(r'^work_history/add/$', WorkViews.AddWorkHistory.as_view(), name='add_work_history'),
-    url(r'^work_history/(?P<pk>[\w-]+)/edit/$', WorkViews.EditWorkHistory.as_view(), name='edit_work_history'),
-    url(r'^work_history/(?P<pk>[\w-]+)/delete/$', WorkViews.DeleteWorkHistory.as_view(), name='delete_work_history'),
+    url(r'^work_history/$', ListWorkHistory.as_view(), name='list_work_history'),
+    url(r'^work_history/add/$', AddWorkHistory.as_view(), name='add_work_history'),
+    url(r'^work_history/(?P<pk>[\w-]+)/edit/$', EditWorkHistory.as_view(), name='edit_work_history'),
+    url(r'^work_history/(?P<pk>[\w-]+)/delete/$', DeleteWorkHistory.as_view(), name='delete_work_history'),
 
     # Education views
     url(r'^education/$', ListEducation.as_view(), name='list_education'),
