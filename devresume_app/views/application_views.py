@@ -15,13 +15,13 @@ class ListApplications(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(ListApplications, self).get_context_data(**kwargs)
         context['title'] = 'Applications'
-        return context
+        return context 
 
 class ApplicationEntryCreate(LoginRequiredMixin, CreateView):
     model = ApplicationEntry
     form_class = ApplicationEntryForm
     template_name = 'generic_form.html'
-    success_url = '/app/applications'
+    success_url = '/app/application'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -41,7 +41,7 @@ class ApplicationEntryUpdate(LoginRequiredMixin, UpdateView):
 class ApplicationEntryDelete(LoginRequiredMixin, DeleteView):
     model = ApplicationEntry
     template_name = 'generic_delete_form.html'
-    success_url = '/app/'
+    success_url = '/app/application'
     def get_object(self, queryset=None):
         """ Hook to ensure object is owned by request.user. """
         obj = super(ApplicationEntryDelete, self).get_object()

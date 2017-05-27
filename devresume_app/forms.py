@@ -41,7 +41,7 @@ class EducationEntryForm(BootstrapForm):
 class ProjectEntryForm(BootstrapForm):
     class Meta:
         model = ProjectEntry 
-        fields = ['name', 'gh_repo', 'website', 'description', 'stars', 'skills']
+        fields = ['name', 'gh_repo', 'website', 'description', 'skills']
 
 class ApplicationEntryForm(BootstrapForm):
     class Meta:

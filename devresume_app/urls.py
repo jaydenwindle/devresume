@@ -36,6 +36,7 @@ urlpatterns = [
     url(r'^projects/add/$', ProjectEntryCreate.as_view(), name='create_project_entry'),
     url(r'^projects/(?P<pk>[\w-]+)/edit/$', ProjectEntryUpdate.as_view(), name='edit_project_entry'),
     url(r'^projects/(?P<pk>[\w-]+)/delete/$', ProjectEntryDelete.as_view(), name='delete_project_entry'),
+    url(r'^projects/import/$', ImportGithubProjects, name='import_github_projects'),
 
     # Application views
     url(r'^application/$', ListApplications.as_view(), name='list_applications'),

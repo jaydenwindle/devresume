@@ -1,7 +1,11 @@
 from django.db import models
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import AbstractUser
+from django.db.models.signals import post_save, m2m_changed
+from django.dispatch import receiver
 import requests
+import math
+from collections import Counter
 
 class User(AbstractUser):
     bio = models.TextField(max_length=500, blank=True)
@@ -18,7 +22,6 @@ class User(AbstractUser):
             r = requests.get('https://api.github.com/users/' + self.username + '/repos')
             print r.text
             super(User, self).save(*args, **kwargs)
-
 
 class SkillEntry(models.Model):
     users = models.ManyToManyField(User)
@@ -51,7 +54,7 @@ class ProjectEntry(models.Model):
     gh_repo = models.URLField(max_length=200);
     website = models.URLField(max_length=200, blank=True);
     description = models.TextField();
-    stars = models.IntegerField();
+    stars = models.IntegerField(blank=True, default=0);
     skills = models.ManyToManyField(SkillEntry, blank=True)
 
 class ApplicationEntry(models.Model):
@@ -59,5 +62,40 @@ class ApplicationEntry(models.Model):
     company_name = models.CharField(max_length=200)
     position = models.CharField(max_length=200)
     desired_skills = models.ManyToManyField(SkillEntry, blank=True)
-    projects = models.ManyToManyField(ProjectEntry, blank=True)
-    jobs = models.ManyToManyField(WorkEntry, blank=True)
+
+class ApplicationProjectRelationship(models.Model):
+    application = models.ForeignKey(ApplicationEntry, related_name="projects")
+    project = models.ForeignKey(ProjectEntry, related_name="applications")
+    similarity = models.DecimalField(decimal_places=4, max_digits=6)
+
+class ApplicationWorkRelationship(models.Model):
+    application = models.ForeignKey(ApplicationEntry, related_name="jobs")
+    work = models.ForeignKey(WorkEntry, related_name="applications")
+    similarity = models.DecimalField(decimal_places=4, max_digits=6)
+
+class ApplicationEducationRelationship(models.Model):
+    application = models.ForeignKey(ApplicationEntry, related_name="education")
+    education = models.ForeignKey(EducationEntry, related_name="applications")
+    similarity = models.DecimalField(decimal_places=4, max_digits=6, blank=True)
+
+@receiver(m2m_changed, sender=ApplicationEntry.desired_skills.through)
+def add_application_data(sender, instance, action, *args, **kwargs):
+    if action == "post_add":
+        user = instance.user
+        for project in user.projects.all():
+            sim = similarity(project.skills.all(), instance.desired_skills.all())
+            p, new = instance.projects.get_or_create(project=project, defaults={"similarity": sim})
+        for job in user.work_history.all():
+            sim = similarity(job.skills.all(), instance.desired_skills.all())
+            p, new = instance.jobs.get_or_create(work=job, defaults={"similarity": sim})
+        for ed in user.education.all():
+            sim = similarity(ed.skills.all(), instance.desired_skills.all())
+            p, new = instance.education.get_or_create(education=ed, defaults={"similarity": sim})
+
+def similarity(v1, v2):
+    num_similar = 0
+    for i in v1:
+        if i in v2:
+            num_similar += 1
+
+    return num_similar
