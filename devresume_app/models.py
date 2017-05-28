@@ -21,11 +21,15 @@ class User(AbstractUser):
     def save(self, *args, **kwargs):
         if self.pk is None:
             r = requests.get('https://api.github.com/users/' + self.username).json()
-            print(r)
-            self.name = r["name"] or ""
-            self.website = r["blog"] or ""
-            self.location = r["location"] or ""
-            self.bio = r["bio"] or ""
+            if r["name"]:
+                self.name = r["name"] 
+            if r["blog"]:
+                self.website = r["blog"]
+            if r["location"]:
+                self.location = r["location"]
+            if r["bio"]:
+                self.bio = r["bio"]
+
         super(User, self).save(*args, **kwargs)
 
 class SkillEntry(models.Model):
