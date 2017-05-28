@@ -8,8 +8,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
 import os
-import dj_database_url
-
+import dj_database_url 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -131,7 +130,11 @@ STATIC_URL = '/static/'
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
+    ('node_modules', os.path.join(PROJECT_ROOT, '/node_modules/')),
+    ('node_modules', os.path.join(BASE_DIR, 'devresume_app/static/node_modules/')),
 )
+
+NODE_MODULES_URL = STATIC_URL + 'node_modules/'
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
