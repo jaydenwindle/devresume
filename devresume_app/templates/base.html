@@ -76,7 +76,6 @@
                     <h1>{{title}}</h1>
                 </div>
                 {% endif %}
-                {% include "tutorial.html" %}
             </div>
         </div>
         <div class="row">
@@ -88,6 +87,7 @@
             {% else %}
             <div class="col-md-12">
             {% endif %}
+                {% include "tutorial.html" %}
                 {% block content %} {% endblock %}
             </div>
         </div>
