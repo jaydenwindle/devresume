@@ -82,6 +82,7 @@
             {% if request.path != '/' %}
             <div class="col-md-3">
                 {% include "menu.html" with id=request.user.id %}
+                {% include "tutorial.html" %}
             </div>
             <div class="col-md-9">
             {% else %}
