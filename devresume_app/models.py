@@ -22,10 +22,10 @@ class User(AbstractUser):
         if self.pk is None:
             r = requests.get('https://api.github.com/users/' + self.username).json()
             print(r)
-            self.name = r["name"]
-            self.website = r["blog"]
-            self.location = r["location"]
-            self.bio = r["bio"]
+            self.name = r["name"] or ""
+            self.website = r["blog"] or ""
+            self.location = r["location"] or ""
+            self.bio = r["bio"] or ""
         super(User, self).save(*args, **kwargs)
 
 class SkillEntry(models.Model):

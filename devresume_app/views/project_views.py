@@ -67,7 +67,7 @@ def ImportGithubProjects(request):
 
         project, new = request.user.projects.get_or_create(name=name) 
         project.description = repo["description"] or ""
-        project.gh_repo = repo["html_url"]
+        project.gh_repo = repo["html_url"] or ""
         project.website = repo["homepage"] or repo["html_url"]
         project.stars = repo["stargazers_count"]
         project.save()
