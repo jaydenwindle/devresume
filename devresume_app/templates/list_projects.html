@@ -1,47 +1,42 @@
-{% extends "base.html" %} {% load staticfiles %} {% block content %}
-
-<div class="row">
-    <div class="col-xs-12">
-
-        <div class="panel panel-default">
-            {% if projects %}
-                 <table class="table">
-                     <tr>
-                         <th>Name</th>
-                         <th>Repo</th>
-                         <th>Skills</th>
-                         <th>Actions</th>
-                     </tr>
-                     {% for project in projects %}
-                     <tr>
-                         <td>{{project.name}}</td>
-                         <td>{{project.gh_repo}}</td>
-                         <td>
-                             {% for skill in project.skills.all %}
-                                {{skill}}
-                             {% endfor %}
-                         </td>
-                         <td>
-                             <a class="text-primary" href="{% url 'edit_project_entry' project.id %}">Edit</a>
-                             <a class="text-danger" href="{% url 'delete_project_entry' project.id %}">Delete</a>
-                         </td>
-                     </tr>
+<div class="panel panel-default">
+    {% if projects %}
+         <table class="table">
+             <tr>
+                 <th>Name</th>
+                 <th>Links</th>
+                 <th>Skills</th>
+                 <th>Actions</th>
+             </tr>
+             {% for project in projects %}
+             <tr>
+                 <td>{{project.name}}</td>
+                 <td>
+                     <a href="{{project.gh_repo}}" target="_blank"><i class="fa fa-link"></i> Repo</a> 
+                     {% if project.gh_repo != project.website %}
+                         <a href="{{project.website}}" target="_blank" style="margin-left: 5px;"><i class="fa fa-link"></i> Website</a>
+                     {% endif %}
+                 </td>
+                 <td>
+                     {% for skill in project.skills.all %}
+                        <span class="label label-default">{{skill}}</span>
                      {% endfor %}
-                </table>
-            {% else %}
-                <div class="panel-body">
-                    <p class="text-center">
-                        No projects yet. Add a project to get started!</p>
-                    </p>
-                </div>
-            {% endif %}
+                 </td>
+                 <td>
+                     <a class="text-primary" href="{% url 'edit_project_entry' project.id %}"><i class="fa fa-pencil"></i></a>
+                     <a class="text-danger" href="{% url 'delete_project_entry' project.id %}"><i class="fa fa-trash"></i></a>
+                 </td>
+             </tr>
+             {% endfor %}
+        </table>
+    {% else %}
+        <div class="panel-body">
+            <p class="text-center">
+                No projects yet. Add a project to get started!</p>
+            </p>
         </div>
-        <div class="row text-center">
-            <a class="text-center btn btn-primary" href="{% url 'create_project_entry' %}"><i class="fa fa-plus"></i> Add a Project</a>
-            <a class="text-center btn btn-primary" href="{% url 'import_github_projects' %}"><i class="fa fa-github"></i> Import from Github</a>
-        </div>
-    
-    </div>
+    {% endif %}
 </div>
-
-{% endblock %}
+<div class="row text-center">
+    <a class="text-center btn btn-primary" href="{% url 'create_project_entry' %}"><i class="fa fa-plus"></i> Add a Project</a>
+    <a class="text-center btn btn-primary" href="{% url 'import_github_projects' %}"><i class="fa fa-github"></i> Import from Github</a>
+</div>

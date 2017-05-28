@@ -11,85 +11,47 @@
             <li>Address: {{user.location}}</li>
             <li>Email: {{user.email}}</li>
             <li>Phone: {{user.phone}}</li>
-        </ul>
-
+        </ul> 
         <h2>Work Experience</h2>
 
-        {% if job0 != None %}
-
-            <h3>{{job0.company}}</h3>
-            <h4>{{job0.company}} - {{job0.startDate}} to {{job0.endDate}}</h4>
-            <p>Skills: {% for skill in job0skills %}
-                {{skill.name}}
-            {% endfor %}</p>
-            {{job0.summary | linebreaks }}
-            
-        {% endif %}
-
-        {% if job1 != None %}
-
-            <h3>{{job1.company}}</h3>
-            <h4>{{job1.company}} - {{job1.startDate}} to {{job1.endDate}}</h4>
-            <p>Skills: {% for skill in job1skills %}
-                {{skill.name}}
-            {% endfor %}</p>
-            {{job1.summary | linebreaks }}
-            
-        {% endif %}
-
-        {% if job2 != None %}
-
-            <h3>{{job2.company}}</h3>
-            <h4>{{job2.company}} - {{job2.startDate}} to {{job2.endDate}}</h4>
-            <p>Skills: {% for skill in job2skills %}
-                {{skill.name}}
-            {% endfor %}</p>
-            {{job2.summary | linebreaks }}
-            
-        {% endif %}
+        {% for j in work_history %}
+            {% with job=j.work %}
+                <h3>{{job.company}}</h3>
+                <h4>{{job.startDate}} to {{job.endDate}}</h4>
+                {{job.summary | linebreaks }}
+                <p>Stack: {% for skill in job.skills.all %}
+                    {{skill.name}}
+                {% endfor %}</p>
+            {% endwith %}
+        {% endfor %}
 
         <h2>Applied Projects</h2>
 
-        {% if project0 != None %}
-
-            <h3>{{project0.name}}</h3>
-            <p>Description: {{project0.description}}</p>
-            <p>Skills: {% for skill in project0skills %}
-                {{skill.name}}
-            {% endfor %}</p>
-            <p><a href="{{project0.gh_repo}}">Github</a> ({{project0.stars}} stars) <a href="{{project0.gh_repo}}">Website</a></p>
-            
-        {% endif %}
-
-        {% if project1 != None %}
-
-            <h3>{{project1.name}}</h3>
-            <p>Description: {{project1.description}}</p>
-            <p>Skills: {% for skill in project1skills %}
-                {{skill.name}}
-            {% endfor %}</p>
-            <p><a href="{{project1.gh_repo}}">Github</a> ({{project1.stars}} stars) <a href="{{project1.gh_repo}}">Website</a></p>
-            
-        {% endif %}
-
-        {% if project2 != None %}
-
-            <h3>{{project2.name}}</h3>
-            <p>Description: {{project2.description}}</p>
-            <p>Skills: {% for skill in project2skills %}
-                {{skill.name}}
-            {% endfor %}</p>
-            <p><a href="{{project2.gh_repo}}">Github</a> ({{project2.stars}} stars) <a href="{{project2.gh_repo}}">Website</a></p>
-            
-        {% endif %}
+        {% for p in projects %}
+            {% with project=p.project %}
+                <h3>{{project.name}}</h3>
+                <p>{{project.description}}</p>
+                <p>Stack: {% for skill in project.skills.all %}
+                    {{skill.name}}
+                {% endfor %}</p>
+            <p>
+                <a href="{{project.gh_repo}}">Github</a> 
+                {% if project.gh_repo != project.website %}
+                    <a href="{{project.website}}">Website</a>
+                {% endif %}
+            </p>
+            {% endwith %}
+        {% endfor %}
 
         <h2>Education</h2>
 
-        {%for school in education_entries %}
-            <h4>{{school.institution}}</h4>
-            <p> {{school.area}} - {{school.studyType}}</p>
-            <p> {{school.startDate}} - {{school.endDate}}</p>
-            <p> {{school.gpa}}</p>
+        {%for s in education %}
+            {% with school=s.education %}
+                <h4>{{school.institution}}</h4>
+                <p> {{school.area}} - {{school.studyType}}</p>
+                <p> {{school.startDate}} - {{school.endDate}}</p>
+                <p> {{school.gpa}}</p>
+            {% endwith %}
         {% endfor %}
     
     </div>

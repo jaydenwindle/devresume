@@ -1,0 +1,32 @@
+<ul class="nav nav-pills nav-stacked">
+    <li role="presentation" {% if request.path == '/app/' %} class="active"{% endif %}>
+        <a href="{% url 'dashboard' %}">
+            <i class="fa fa-home"></i>
+            Home
+        </a>
+    </li>
+    <li role="presentation" {% if 'resume_info' in request.path or 'work_history' in request.path or 'projects' in request.path or 'education'  in request.path %} class="active" {% endif %}>
+        <a href="{% url 'resume_info' %}" >
+            <i class="fa fa-address-card-o"></i>
+            Resume Info
+        </a>
+    </li>
+    <li role="presentation" {% if '/applications/' in request.path %} class="active"{% endif %}>
+        <a href="{% url 'list_applications' %}">
+            <i class="fa fa-send"></i>
+            Applications 
+        </a>
+    </li>
+    <li role="presentation" {% if '/find_jobs/' in request.path %} class="active"{% endif %}>
+        <a href="{% url 'job_list' %}">
+            <i class="fa fa-money"></i>
+            Find a Job
+        </a>
+    </li>
+    <li role="presentation" {% if '/profile/' in request.path %} class="active"{% endif %}>
+        <a href="{% url 'edit_user_profile' id %}">
+            <i class="fa fa-user-circle-o"></i>
+            Profile
+        </a>
+    </li>
+</ul>

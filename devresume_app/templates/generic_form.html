@@ -2,44 +2,38 @@
 
 {% block content %}
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-push-2">
-            <form class="" method="post">{% csrf_token %}
-                <fieldset>
-                    {% for field in form %}
-                        {% if field.errors %}
-                        <div class="form-group error">
-                            <label>{{ field.label  }}</label> 
-                            <div>{{ field }}
-                                <div class="alert alert-danger">
-                                {% for error in  field.errors %}{{ error  }}{% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                        {% else %}
-                        <div class="form-group">
-                            <label>{{ field.label  }}</label> 
-                            <div>{{ field }}
-                                {% if field.help_text %}
-                                <p><small class="form-text text-muted">{{ field.help_text  }}</small></p>
-                                {% endif %}
-                            </div>
-                            {% if field.name == "skills" or field.name == "desired_skills" %}
-                            <label>(Don't see the skill you want? Add a new skill <a href="{% url 'create_skill_entry' %}" class="text-primary">Here</a>)</label> 
-                            {% endif %}
-                        </div>
-                        {% endif %}
-                    {% endfor %}
-                </fieldset>
-                <br />
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary" >Submit</button>
+<form class="" method="post">{% csrf_token %}
+    <fieldset>
+        {% for field in form %}
+            {% if field.errors %}
+            <div class="form-group error">
+                <label>{{ field.label  }}</label> 
+                <div>{{ field }}
+                    <div class="alert alert-danger">
+                    {% for error in  field.errors %}{{ error  }}{% endfor %}
+                    </div>
                 </div>
-                <br /><br />
-            </form>
-        </div>
+            </div>
+            {% else %}
+            <div class="form-group">
+                <label>{{ field.label  }}</label> 
+                <div>{{ field }}
+                    {% if field.help_text %}
+                    <p><small class="form-text text-muted">{{ field.help_text }}</small></p>
+                    {% endif %}
+                </div>
+                {% if field.name == "skills" or field.name == "desired_skills" %}
+                <label>(Don't see the skill you want? Add a new skill <a href="{% url 'create_skill_entry' %}" class="text-primary">Here</a>)</label> 
+                {% endif %}
+            </div>
+            {% endif %}
+        {% endfor %}
+    </fieldset>
+    <br />
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary" >Submit</button>
     </div>
-</div>
+    <br /><br />
+</form>
 
 {% endblock content %}

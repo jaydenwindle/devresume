@@ -21,7 +21,7 @@ class AddWorkHistory(LoginRequiredMixin, CreateView):
     model = WorkEntry
     form_class = WorkEntryForm
     template_name = 'generic_form.html'
-    success_url = '/app/work_history/'
+    success_url = '/app/resume_info/'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -36,7 +36,7 @@ class EditWorkHistory(LoginRequiredMixin, UpdateView):
     model = WorkEntry
     form_class = WorkEntryForm
     template_name = 'generic_form.html'
-    success_url = '/app/work_history/'
+    success_url = '/app/resume_info/'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -44,7 +44,7 @@ class EditWorkHistory(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(EditWorkHistory, self).get_context_data(**kwargs)
-        context['title'] = 'Edit Work History'
+        context['title'] = 'Update Work History'
         return context
 
 class DeleteWorkHistory(LoginRequiredMixin, DeleteView):

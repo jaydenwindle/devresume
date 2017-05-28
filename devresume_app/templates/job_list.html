@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% load staticfiles %} {% block content %}
+
+<form action="">
+    <div class="input-group">
+        <input type="text" class="form-control" name="q" placeholder="{{ query }}">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+            </span>
+    </div><!-- /input-group -->
+</form>
+
+<div class="list-group">
+{% for job in job_list %}
+    <div class="list-group-item">
+        <a href="{{job.url}}" target="_blank">
+            <h4 class="list-group-item-heading">{{job.jobtitle}}</h4>
+            <p class="list-group-item-text text-muted">{{job.company}}</p>
+        </a>
+        <br />
+        <p class="list-group-item-text">{{job.snippet | safe}}</p>
+        <br />
+        <a class="btn btn-success" href="{% url 'create_application_entry' %}">Create a Resume</a>
+    </div>
+{% endfor %}
+</div>
+
+<span id="indeed_at"><a title="Job Search" href="https://www.indeed.com" rel="nofollow" >jobs by <img alt=Indeed src="https://www.indeed.com/p/jobsearch.gif" style="border: 0; vertical-align: middle;"></a></span>
+{% endblock %}

@@ -11,7 +11,7 @@ class BootstrapForm(forms.ModelForm):
 class UserForm(BootstrapForm):
     class Meta:
         model = User 
-        fields = ['location', 'phone', 'website']
+        fields = ['name', 'bio', 'location', 'email', 'phone', 'website']
 
 class SkillEntryForm(BootstrapForm):
     class Meta:

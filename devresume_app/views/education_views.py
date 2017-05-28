@@ -21,7 +21,7 @@ class EducationEntryCreate(LoginRequiredMixin, CreateView):
     model = EducationEntry
     form_class = EducationEntryForm
     template_name = 'generic_form.html'
-    success_url = '/app/education'
+    success_url = '/app/resume_info'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -36,12 +36,17 @@ class EducationEntryUpdate(LoginRequiredMixin, UpdateView):
     model = EducationEntry
     form_class = EducationEntryForm
     template_name = 'generic_form.html'
-    success_url = '/app/'
+    success_url = '/app/resume_info'
+
+    def get_context_data(self, **kwargs):
+        context = super(EducationEntryUpdate, self).get_context_data(**kwargs)
+        context['title'] = 'Update Education Entry'
+        return context
 
 class EducationEntryDelete(LoginRequiredMixin, DeleteView):
     model = EducationEntry
     template_name = 'generic_delete_form.html'
-    success_url = '/app/'
+    success_url = '/app/resume_info'
     def get_object(self, queryset=None):
         """ Hook to ensure object is owned by request.user. """
         obj = super(EducationEntryDelete, self).get_object()

@@ -1,30 +1,31 @@
 {% extends "base.html" %} {% load staticfiles %} {% block content %}
 
-<div class="row">
-    <div class="col-md-4">
-        <a href="{% url 'list_work_history' %}" class="btn btn-primary btn-block btn-massive">
-            <i class="fa fa-history"></i>
-            <p>Work History</p>
-        </a>
+<ul class="nav nav-tabs nav-justified">
+    <li role="presentation" class="active">
+        <a data-toggle="tab" href="#work_history"><i class="fa fa-history"></i> Work History</a>
+    </li>
+    <li role="presentation">
+        <a data-toggle="tab" href="#projects"><i class="fa fa-cubes"></i> Projects</a>
+    </li>
+    <li role="presentation">
+        <a data-toggle="tab" href="#education"><i class="fa fa-graduation-cap"></i> Education</a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div id="work_history" class="tab-pane fade in active">
+        <br />
+        {% include "list_work_history.html" with work_history=work_history %}
     </div>
-    <div class="col-md-4">
-        <a href="{% url 'list_projects' %}" class="btn btn-primary btn-block btn-massive">
-            <i class="fa fa-cubes"></i>
-            <p>Projects</p>
-        </a>
+    <div id="projects" class="tab-pane fade">
+        <br />
+        {% include "list_projects.html" with projects=projects %}
     </div>
-    <!--<div class="col-md-6">-->
-        <!--<a class="btn btn-primary btn-block btn-massive">-->
-            <!--<i class="fa fa-tasks"></i>-->
-            <!--<p>Skills</p>-->
-        <!--</a>-->
-    <!--</div>-->
-    <div class="col-md-4">
-        <a href="{% url 'list_education' %}" class="btn btn-primary btn-block btn-massive">
-            <i class="fa fa-graduation-cap"></i>
-            <p>Education</p>
-        </a>
+    <div id="education" class="tab-pane fade">
+        <br />
+        {% include "list_education.html" with education=education %}
     </div>
+</div>
 </div>
 
 {% endblock %}

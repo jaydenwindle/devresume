@@ -8,6 +8,7 @@ import math
 from collections import Counter
 
 class User(AbstractUser):
+    name = models.CharField(max_length=100, blank=True)
     bio = models.TextField(max_length=500, blank=True)
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
@@ -19,9 +20,13 @@ class User(AbstractUser):
 
     def save(self, *args, **kwargs):
         if self.pk is None:
-            r = requests.get('https://api.github.com/users/' + self.username + '/repos')
-            print r.text
-            super(User, self).save(*args, **kwargs)
+            r = requests.get('https://api.github.com/users/' + self.username).json()
+            print(r)
+            self.name = r["name"]
+            self.website = r["blog"]
+            self.location = r["location"]
+            self.bio = r["bio"]
+        super(User, self).save(*args, **kwargs)
 
 class SkillEntry(models.Model):
     users = models.ManyToManyField(User)
@@ -89,6 +94,7 @@ def add_application_data(sender, instance, action, *args, **kwargs):
             sim = similarity(job.skills.all(), instance.desired_skills.all())
             p, new = instance.jobs.get_or_create(work=job, defaults={"similarity": sim})
         for ed in user.education.all():
+            print(ed)
             sim = similarity(ed.skills.all(), instance.desired_skills.all())
             p, new = instance.education.get_or_create(education=ed, defaults={"similarity": sim})
 

@@ -1,42 +1,32 @@
-{% extends "base.html" %} {% load staticfiles %} {% block content %}
-
-<div class="row">
-    <div class="col-xs-12">
-
-        <div class="panel panel-default">
-            {% if work_history %}
-                 <table class="table">
-                     <tr>
-                         <th>Job Title</th>
-                         <th>Company</th>
-                         <th>Duration</th>
-                         <th>Actions</th>
-                     </tr>
-                     {% for work_entry in work_history %}
-                         <tr>
-                             <td>{{ work_entry.position }}</td>
-                             <td>{{ work_entry.company }}</td>
-                             <td>{{ work_entry.startDate }} - {{ work_entry.endDate }}</td>
-                             <td>
-                                 <a class="text-primary" href="{% url 'edit_work_history' work_entry.id %}">Edit</a>
-                                 <a class="text-danger" href="{% url 'delete_work_history' work_entry.id %}">Delete</a>
-                             </td>
-                         </tr>
-                     {% endfor %}
-                </table>
-            {% else %}
-                <div class="panel-body">
-                    <p class="text-center">
-                        No work history yet. Add a job to get started!</p>
-                    </p>
-                </div>
-            {% endif %}
+<div class="panel panel-default">
+    {% if work_history %}
+         <table class="table">
+             <tr>
+                 <th>Job Title</th>
+                 <th>Company</th>
+                 <th>Duration</th>
+                 <th>Actions</th>
+             </tr>
+             {% for work_entry in work_history %}
+                 <tr>
+                     <td>{{ work_entry.position }}</td>
+                     <td>{{ work_entry.company }}</td>
+                     <td>{{ work_entry.startDate }} - {{ work_entry.endDate }}</td>
+                     <td>
+                         <a class="text-primary" href="{% url 'edit_work_history' work_entry.id %}">Edit</a>
+                         <a class="text-danger" href="{% url 'delete_work_history' work_entry.id %}">Delete</a>
+                     </td>
+                 </tr>
+             {% endfor %}
+        </table>
+    {% else %}
+        <div class="panel-body">
+            <p class="text-center">
+                No work history yet. Add a job to get started!</p>
+            </p>
         </div>
-        <div class="row text-center">
-            <a class="text-center btn btn-primary" href="{% url 'add_work_history' %}"><i class="fa fa-plus"></i> Add a Job</a>
-        </div>
-    
-    </div>
+    {% endif %}
 </div>
-
-{% endblock %}
+<div class="row text-center">
+    <a class="text-center btn btn-primary" href="{% url 'add_work_history' %}"><i class="fa fa-plus"></i> Add a Job</a>
+</div>

@@ -30,10 +30,20 @@ class ProjectEntryCreate(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super(ProjectEntryCreate, self).form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super(ProjectEntryCreate, self).get_context_data(**kwargs)
+        context['title'] = 'Add a Project'
+        return context
+
 class ProjectEntryUpdate(LoginRequiredMixin, UpdateView):
     model = ProjectEntry
     form_class = ProjectEntryForm
     template_name = 'generic_form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProjectEntryUpdate, self).get_context_data(**kwargs)
+        context['title'] = 'Update Project'
+        return context
 
 class ProjectEntryDelete(LoginRequiredMixin, DeleteView):
     model = ProjectEntry
@@ -66,4 +76,4 @@ def ImportGithubProjects(request):
                 s, new = SkillEntry.objects.get_or_create(name=skill)
                 project.skills.add(s)
 
-    return redirect("list_projects")
+    return redirect("resume_info")
