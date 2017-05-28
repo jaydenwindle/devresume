@@ -81,10 +81,10 @@
                 {% include "menu.html" with id=request.user.id %}
             </div>
             <div class="col-md-9">
+                {% include "tutorial.html" %}
             {% else %}
             <div class="col-md-12">
             {% endif %}
-                {% include "tutorial.html" %}
                 {% block content %} {% endblock %}
             </div>
         </div>
