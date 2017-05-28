@@ -33,6 +33,12 @@ class ApplicationEntryCreate(LoginRequiredMixin, CreateView):
         context['title'] = 'Add an Application'
         return context
 
+    def get_form_kwargs(self):
+        kwargs = super(ApplicationEntryCreate, self).get_form_kwargs()
+        kwargs['request'] = self.request 
+
+        return kwargs
+
 class ApplicationEntryUpdate(LoginRequiredMixin, UpdateView):
     model = ApplicationEntry
     form_class = ApplicationEntryForm

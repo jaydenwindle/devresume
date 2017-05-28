@@ -3,6 +3,7 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from devresume_app.models import ProjectEntry, SkillEntry
 from devresume_app.forms import ProjectEntryForm
+from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from requests import get
 
@@ -24,7 +25,7 @@ class ProjectEntryCreate(LoginRequiredMixin, CreateView):
     model = ProjectEntry
     form_class = ProjectEntryForm
     template_name = 'generic_form.html'
-    success_url = '/app/'
+    success_url = '/app/resume_info#projects'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -39,6 +40,7 @@ class ProjectEntryUpdate(LoginRequiredMixin, UpdateView):
     model = ProjectEntry
     form_class = ProjectEntryForm
     template_name = 'generic_form.html'
+    success_url = '/app/resume_info#projects'
 
     def get_context_data(self, **kwargs):
         context = super(ProjectEntryUpdate, self).get_context_data(**kwargs)
@@ -48,6 +50,7 @@ class ProjectEntryUpdate(LoginRequiredMixin, UpdateView):
 class ProjectEntryDelete(LoginRequiredMixin, DeleteView):
     model = ProjectEntry
     template_name = 'generic_delete_form.html'
+    success_url = '/app/resume_info#projects'
     def get_object(self, queryset=None):
         """ Hook to ensure object is owned by request.user. """
         obj = super(ProjectEntryDelete, self).get_object()
@@ -76,4 +79,4 @@ def ImportGithubProjects(request):
                 s, new = SkillEntry.objects.get_or_create(name=skill)
                 project.skills.add(s)
 
-    return redirect("resume_info")
+    return redirect(reverse("resume_info") + "#projects")

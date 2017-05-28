@@ -47,3 +47,10 @@ class ApplicationEntryForm(BootstrapForm):
     class Meta:
         model = ApplicationEntry 
         fields = ['company_name', 'position', 'desired_skills']
+
+    def __init__(self, *args, **kwargs):
+        if kwargs.get('request'):
+            self.request = kwargs.pop('request', None)
+        super(ApplicationEntryForm, self).__init__(*args,**kwargs)
+        self.fields["company_name"].initial = self.request.GET.get('company', "")
+        self.fields["position"].initial = self.request.GET.get('position', "")
