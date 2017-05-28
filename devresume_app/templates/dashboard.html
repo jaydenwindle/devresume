@@ -1,12 +1,14 @@
 {% extends "base.html" %} {% load staticfiles %} {% block content %}
 
 {% if not request.user.projects.all %}
+<div class="row">
     <div class="col-md-12">
         <div class="alert alert-success" role="alert">
             Welcome to devresume! Get started by importing your github projects 
             <a class="btn btn-primary" href="{% url 'import_github_projects' %}" style="margin-left: 10px;">Import Now</a>
         </div>
     </div>
+</div>
 {% elif not request.user.work_history.all %}
     <div class="col-md-12">
         <div class="row">
