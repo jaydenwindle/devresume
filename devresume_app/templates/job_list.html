@@ -19,7 +19,7 @@
         <br />
         <p class="list-group-item-text">{{job.snippet | safe}}</p>
         <br />
-        <a class="btn btn-success" href="{% url 'create_application_entry' %}?company={{job.company}}&position={{job.jobtitle}}">Create a Resume</a>
+        <a class="btn btn-primary" href="{% url 'create_application_entry' %}?company={{job.company}}&position={{job.jobtitle}}">Create a Resume</a>
     </div>
 {% endfor %}
 </div>
