@@ -19,5 +19,12 @@ gulp.task('sass', function () {
     // Write the resulting CSS in the output folder
     .pipe(concat("style.css"))
     .pipe(gulp.dest(output));
-
 });
+
+gulp.task('fonts', function () {
+    return gulp
+        .src(['node_modules/bootstrap-sass/assets/fonts/**/*'])
+        .pipe(gulp.dest('devresume/static/fonts'));
+});
+
+gulp.task('build', ['sass', 'fonts']);
