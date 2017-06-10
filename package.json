@@ -7,6 +7,6 @@
   },
   "dependencies": {},
   "scripts": {
-    "postinstall": "./node_modules/.bin/gulp sass"
+    "postinstall": "gulp sass"
   }
 }
