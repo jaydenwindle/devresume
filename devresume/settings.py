@@ -16,8 +16,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
-
+# See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/ 
 # SECURITY WARNING: change this before deploying to production!
 SECRET_KEY = os.environ['SECRET_KEY'] 
 
@@ -130,6 +129,7 @@ STATIC_URL = '/static/'
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
+    os.path.join(PROJECT_ROOT, 'node_modules/bootstrap-sass/assets'),
 )
 
 # Simplified static file serving.
