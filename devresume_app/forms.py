@@ -51,6 +51,10 @@ class ApplicationEntryForm(BootstrapForm):
     def __init__(self, *args, **kwargs):
         if kwargs.get('request'):
             self.request = kwargs.pop('request', None)
-        super(ApplicationEntryForm, self).__init__(*args,**kwargs)
-        self.fields["company_name"].initial = self.request.GET.get('company', "")
-        self.fields["position"].initial = self.request.GET.get('position', "")
+            super(ApplicationEntryForm, self).__init__(*args,**kwargs)
+            if self.request.GET.get('company', None):
+                self.fields["company_name"].initial = self.request.GET.get('company', "")
+            if self.request.GET.get('position', None):
+                self.fields["position"].initial = self.request.GET.get('position', "")
+        else:
+            super(ApplicationEntryForm, self).__init__(*args,**kwargs)

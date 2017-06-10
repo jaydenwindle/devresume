@@ -3,10 +3,17 @@
 <div>
     <div class="jumbotron jumbotron-home text-center landing">
         <div class="container">
-            <h1>Developer Resumes Are Different.</h1>
-            <p>DevResume helps developers build the perfect resume for every job application.</p>
-            <br />
-            <a type="button" class="btn btn-lg btn-primary" href="{% url 'social:begin' 'github' %}"></span> Login with <i class="fa fa-github"></i></a>
+            <div class="row">
+                <div class="col-md-8 text-left">
+                    <h1>Developer Resumes Are Different.</h1>
+                    <p>DevResume helps developers build the perfect resume for every job application.</p>
+                    <br />
+                    <a type="button" class="btn btn-lg btn-default" href="{% url 'social:begin' 'github' %}"></span> Login with <i class="fa fa-github"></i></a>
+                </div>
+                <div class="col-md-4">
+                    <img class="img-responsive" src="{% static 'images/resume.png' %}" alt="">
+                </div>
+            </div>
         </div>
     </div>
 

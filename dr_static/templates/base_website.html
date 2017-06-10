@@ -15,48 +15,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="{% sass_src 'css/style.scss' %}">
 </head>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            // form elements
-            $('select').select2();
-            $('#id_startDate').datepicker();
-            $('#id_endDate').datepicker();
-            // tooltips
-            $('[data-toggle="tooltip"]').tooltip()
-
-            // link to tab
-            var url = document.location.toString();
-            if (url.match('#')) {
-                $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
-            }
-        });
-    </script>
-
 <body>
     {% include "navbar.html" %}
-    <div class="content container">
-        <div class="row">
-            <div class="col-md-9 col-md-push-3">
-                {% if title %}
-                <div class="page-header">
-                    <h1>{{title}}</h1>
-                </div>
-                {% endif %}
-            </div>
-        </div>
-        <div class="row">
-            {% if request.path != '/' %}
-            <div class="col-md-3">
-                {% include "menu.html" %}
-            </div>
-            <div class="col-md-9">
-                {% include "tutorial.html" %}
-            {% else %}
-            <div class="col-md-12">
-            {% endif %}
-                {% block content %} {% endblock %}
-            </div>
-        </div>
+    <div class="content">
+        {% block content %} {% endblock %}
     </div>
     <footer>
         <div class="container">

@@ -10,6 +10,9 @@ class UserInfoUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'generic_form.html'
     success_url = '/app/'
 
+    def get_object(self):
+        return User.objects.get(pk=self.request.user.id)
+
     def get_context_data(self, **kwargs):
         context = super(UserInfoUpdate, self).get_context_data(**kwargs)
         context['title'] = 'Edit Profile'

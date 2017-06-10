@@ -5,6 +5,7 @@
                  <th>Institution</th>
                  <th>Dates</th>
                  <th>Major</th>
+                 <th>Actions</th>
              </tr>
              {% for ed in education %}
              <tr>
@@ -12,9 +13,13 @@
                  <td>{{ed.institution}}</td>
                  <td>{{ed.startDate}} - {{ed.endDate}}</td>
                  <td>{{ed.area}}</td>
-                 <td>
-                     <a class="text-primary" href="{% url 'update_education_entry' ed.id %}">Edit</a>
-                     <a class="text-danger" href="{% url 'delete_education_entry' ed.id %}">Delete</a>
+                 <td class="actions">
+                     <a class="text-primary" href="{% url 'update_education_entry' ed.id %}">
+                         <i class="fa fa-pencil"></i>
+                     </a>
+                     <a class="text-danger" href="{% url 'delete_education_entry' ed.id %}">
+                         <i class="fa fa-trash"></i>
+                     </a>
                  </td>
              </tr>
              {% endfor %}

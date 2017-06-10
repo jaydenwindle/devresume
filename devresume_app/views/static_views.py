@@ -15,11 +15,6 @@ def resume_info(request):
         "education": request.user.education.all()
     })
 
-def landingPage(request):
-    return render(request, 'index.html', {
-        'user': request.user
-    })
-
 def job_list(request):
     query = request.GET.get('q', 'developer')
     job_list = get("http://api.indeed.com/ads/apisearch", params={

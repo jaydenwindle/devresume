@@ -16,13 +16,17 @@
                          <td>{{app.company_name}} - {{app.position}}</td>
                          <td>
                              {% for skill in app.desired_skills.all %}
-                                {{skill}}
+                                <span class="label label-default">{{skill}}</span>
                              {% endfor %}
                          </td>
-                         <td>
+                         <td class="actions">
                              <a class="text-success" href="{% url 'view_application_resume' app.id %}">View Resume</a>
-                             <a class="text-primary" href="{% url 'edit_application_entry' app.id %}">Edit</a>
-                             <a class="text-danger" href="{% url 'delete_application_entry' app.id %}">Delete</a>
+                             <a class="text-primary" href="{% url 'edit_application_entry' app.id %}">
+                                 <i class="fa fa-pencil"></i>
+                             </a>
+                             <a class="text-danger" href="{% url 'delete_application_entry' app.id %}">
+                                 <i class="fa fa-trash"></i>
+                             </a>
                          </td>
                      </tr>
                      {% endfor %}

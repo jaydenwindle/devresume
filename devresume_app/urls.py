@@ -15,7 +15,7 @@ urlpatterns = [
     url(r'^find_jobs/$', job_list, name='job_list'),
 
     # User views
-    url(r'^profile/(?P<pk>[\w-]+)/edit/$', UserInfoUpdate.as_view(), name='edit_user_profile'),
+    url(r'^profile/edit/$', UserInfoUpdate.as_view(), name='edit_user_profile'),
 
     # Work views
     url(r'^work_history/add/$', AddWorkHistory.as_view(), name='add_work_history'),

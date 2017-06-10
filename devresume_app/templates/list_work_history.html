@@ -12,9 +12,13 @@
                      <td>{{ work_entry.position }}</td>
                      <td>{{ work_entry.company }}</td>
                      <td>{{ work_entry.startDate }} - {{ work_entry.endDate }}</td>
-                     <td>
-                         <a class="text-primary" href="{% url 'edit_work_history' work_entry.id %}">Edit</a>
-                         <a class="text-danger" href="{% url 'delete_work_history' work_entry.id %}">Delete</a>
+                     <td class="actions">
+                         <a class="text-primary" href="{% url 'edit_work_history' work_entry.id %}">
+                             <i class="fa fa-pencil"></i>
+                         </a>
+                         <a class="text-danger" href="{% url 'delete_work_history' work_entry.id %}">
+                             <i class="fa fa-trash"></i>
+                         </a>
                      </td>
                  </tr>
              {% endfor %}
