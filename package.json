@@ -6,4 +6,7 @@
     "gulp-sass": "^3.1.0"
   },
   "dependencies": {}
+  "scripts": {
+    "postinstall": "./node_modules/.bin/gulp sass"
+  }
 }
