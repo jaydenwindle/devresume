@@ -35,7 +35,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social_django', # social login
-    'sass_processor',
     'dr_static',
     'devresume_app',
 )
