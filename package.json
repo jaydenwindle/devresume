@@ -7,7 +7,7 @@
     "gulp-sass": "^3.1.0"
   },
   "scripts": {
-    "postinstall": "./node_modules/.bin/gulp sass"
+    "postinstall": "./node_modules/.bin/gulp build"
   },
   "dependencies": {
     "bootstrap-sass": "^3.3.7",
