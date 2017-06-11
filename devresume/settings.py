@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 import os
 import dj_database_url 
+import raven
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -34,6 +35,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social_django', # social login
+    'raven.contrib.django.raven_compat', #sentry.io error logging
     'dr_static',
     'dr_app',
 )
@@ -70,6 +72,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'devresume.wsgi.application'
+
+RAVEN_CONFIG = {
+    'dsn': 'https://1ace4d1a738f4f188952bb2eb1dc8b26:60f3f4aa18dd41c0b59db733d1337dba@sentry.io/178415',
+    'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
+}
+
 
 
 # Database
