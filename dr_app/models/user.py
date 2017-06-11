@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.core.validators import RegexValidator
+from requests import get
 
 class User(AbstractUser):
     name = models.CharField(max_length=100, blank=True)
@@ -15,7 +16,7 @@ class User(AbstractUser):
 
     def save(self, *args, **kwargs):
         if self.pk is None:
-            r = requests.get('https://api.github.com/users/' + self.username).json()
+            r = get('https://api.github.com/users/' + self.username).json()
             if r["name"]:
                 self.name = r["name"] 
             if r["blog"]:
