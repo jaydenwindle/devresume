@@ -1,11 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from devresume_app.models import EducationEntry
-from devresume_app.forms import EducationEntryForm
+from dr_app.models import Education
+from dr_app.forms import EducationForm
 
 class ListEducation(LoginRequiredMixin, ListView):
-    model = EducationEntry
+    model = Education
     template_name = 'list_education.html'
     context_object_name="education"
 
@@ -17,39 +17,40 @@ class ListEducation(LoginRequiredMixin, ListView):
         context['title'] = 'Education'
         return context
 
-class EducationEntryCreate(LoginRequiredMixin, CreateView):
-    model = EducationEntry
-    form_class = EducationEntryForm
+class EducationCreate(LoginRequiredMixin, CreateView):
+    model = Education
+    form_class = EducationForm
     template_name = 'generic_form.html'
     success_url = '/app/resume_info'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super(EducationEntryCreate, self).form_valid(form)
+        return super(EducationCreate, self).form_valid(form)
 
     def get_context_data(self, **kwargs):
-        context = super(EducationEntryCreate, self).get_context_data(**kwargs)
-        context['title'] = 'Add an Education Entry'
+        context = super(EducationCreate, self).get_context_data(**kwargs)
+        context['title'] = 'Add an Education '
         return context
 
-class EducationEntryUpdate(LoginRequiredMixin, UpdateView):
-    model = EducationEntry
-    form_class = EducationEntryForm
+class EducationUpdate(LoginRequiredMixin, UpdateView):
+    model = Education
+    form_class = EducationForm
     template_name = 'generic_form.html'
     success_url = '/app/resume_info'
 
     def get_context_data(self, **kwargs):
-        context = super(EducationEntryUpdate, self).get_context_data(**kwargs)
-        context['title'] = 'Update Education Entry'
+        context = super(EducationUpdate, self).get_context_data(**kwargs)
+        context['title'] = 'Update Education '
         return context
 
-class EducationEntryDelete(LoginRequiredMixin, DeleteView):
-    model = EducationEntry
+class EducationDelete(LoginRequiredMixin, DeleteView):
+    model = Education
     template_name = 'generic_delete_form.html'
     success_url = '/app/resume_info'
+
     def get_object(self, queryset=None):
         """ Hook to ensure object is owned by request.user. """
-        obj = super(EducationEntryDelete, self).get_object()
+        obj = super(EducationDelete, self).get_object()
         if not obj.user == self.request.user:
             raise Http404
         return obj

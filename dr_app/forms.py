@@ -13,18 +13,18 @@ class UserForm(BootstrapForm):
         model = User 
         fields = ['name', 'bio', 'location', 'email', 'phone', 'website']
 
-class SkillEntryForm(BootstrapForm):
+class SkillForm(BootstrapForm):
     class Meta:
-        model = SkillEntry 
+        model = Skill 
         fields = ['name']
 
-class WorkEntryForm(BootstrapForm):
+class WorkForm(BootstrapForm):
     class Meta:
-        model = WorkEntry 
+        model = Work 
         fields = ['company', 'position', 'summary', 'startDate', 'endDate', 'skills']
 
     def __init__(self, *args, **kwargs):
-        super(WorkEntryForm, self).__init__(*args, **kwargs)
+        super(WorkForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             if field_name == 'startDate':
                 self.fields[field_name].label = "Start Date"
@@ -33,28 +33,38 @@ class WorkEntryForm(BootstrapForm):
                 self.fields[field_name].label = "End Date"
                 field.widget.attrs['placeholder'] = "MM/DD/YYYY"
 
-class EducationEntryForm(BootstrapForm):
+class EducationForm(BootstrapForm):
     class Meta:
-        model = EducationEntry 
+        model = Education 
         fields = ['institution','area', 'startDate', 'endDate', 'skills']
 
-class ProjectEntryForm(BootstrapForm):
+    def __init__(self, *args, **kwargs):
+        super(EducationForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if field_name == 'startDate':
+                self.fields[field_name].label = "Start Date"
+                field.widget.attrs['placeholder'] = "MM/DD/YYYY"
+            if field_name == 'endDate':
+                self.fields[field_name].label = "End Date"
+                field.widget.attrs['placeholder'] = "MM/DD/YYYY"
+
+class ProjectForm(BootstrapForm):
     class Meta:
-        model = ProjectEntry 
+        model = Project 
         fields = ['name', 'gh_repo', 'website', 'description', 'skills']
 
-class ApplicationEntryForm(BootstrapForm):
+class ApplicationForm(BootstrapForm):
     class Meta:
-        model = ApplicationEntry 
+        model = Application 
         fields = ['company_name', 'position', 'desired_skills']
 
     def __init__(self, *args, **kwargs):
         if kwargs.get('request'):
             self.request = kwargs.pop('request', None)
-            super(ApplicationEntryForm, self).__init__(*args,**kwargs)
+            super(ApplicationForm, self).__init__(*args,**kwargs)
             if self.request.GET.get('company', None):
                 self.fields["company_name"].initial = self.request.GET.get('company', "")
             if self.request.GET.get('position', None):
                 self.fields["position"].initial = self.request.GET.get('position', "")
         else:
-            super(ApplicationEntryForm, self).__init__(*args,**kwargs)
+            super(ApplicationForm, self).__init__(*args,**kwargs)

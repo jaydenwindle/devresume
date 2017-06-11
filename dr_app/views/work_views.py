@@ -1,11 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from devresume_app.models import WorkEntry
-from devresume_app.forms import WorkEntryForm
+from dr_app.models import Work
+from dr_app.forms import WorkForm
 
 class ListWorkHistory(LoginRequiredMixin, ListView):
-    model = WorkEntry
+    model = Work
     template_name = 'list_work_history.html'
     context_object_name="work_history"
 
@@ -18,8 +18,8 @@ class ListWorkHistory(LoginRequiredMixin, ListView):
         return context
 
 class AddWorkHistory(LoginRequiredMixin, CreateView):
-    model = WorkEntry
-    form_class = WorkEntryForm
+    model = Work
+    form_class = WorkForm
     template_name = 'generic_form.html'
     success_url = '/app/resume_info/'
 
@@ -33,8 +33,8 @@ class AddWorkHistory(LoginRequiredMixin, CreateView):
         return context
 
 class EditWorkHistory(LoginRequiredMixin, UpdateView):
-    model = WorkEntry
-    form_class = WorkEntryForm
+    model = Work
+    form_class = WorkForm
     template_name = 'generic_form.html'
     success_url = '/app/resume_info/'
 
@@ -48,13 +48,13 @@ class EditWorkHistory(LoginRequiredMixin, UpdateView):
         return context
 
 class DeleteWorkHistory(LoginRequiredMixin, DeleteView):
-    model = WorkEntry
+    model = Work
     template_name = 'generic_delete_form.html'
     success_url = '/app/work_history'
 
     def get_object(self, queryset=None):
         """ Hook to ensure object is owned by request.user. """
-        obj = super(WorkEntryDelete, self).get_object()
+        obj = super(WorkDelete, self).get_object()
         if not obj.user == self.request.user:
             raise Http404
         return obj

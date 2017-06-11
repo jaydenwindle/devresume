@@ -1,8 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
 from django.views.generic.edit import UpdateView
-from devresume_app.models import User
-from devresume_app.forms import UserForm
+from dr_app.models import User
+from django import forms
+from dr_app.forms import UserForm 
 
 class UserInfoUpdate(LoginRequiredMixin, UpdateView):
     model = User

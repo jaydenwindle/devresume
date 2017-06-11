@@ -35,7 +35,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'social_django', # social login
     'dr_static',
-    'devresume_app',
+    'dr_app',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -136,7 +136,7 @@ STATICFILES_DIRS = (
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # Custom user model for custom fields
-AUTH_USER_MODEL = 'devresume_app.User'
+AUTH_USER_MODEL = 'dr_app.User'
 
 # login with github
 AUTHENTICATION_BACKENDS = (
