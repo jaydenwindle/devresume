@@ -75,7 +75,6 @@ WSGI_APPLICATION = 'devresume.wsgi.application'
 
 RAVEN_CONFIG = {
     'dsn': 'https://1ace4d1a738f4f188952bb2eb1dc8b26:60f3f4aa18dd41c0b59db733d1337dba@sentry.io/178415',
-    'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
 }
 
 
